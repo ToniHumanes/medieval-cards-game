@@ -1,0 +1,24 @@
+{
+  "name": "medieval-cards",
+  "version": "1.0.0",
+  "description": "Medieval Cards Game",
+  "main": "webpack.config.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ToniHumanes/medieval-cards-game.git"
+  },
+  "keywords": [
+    "game",
+    "cards",
+    "medieval"
+  ],
+  "author": "Antonio Humanes Pacheco",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ToniHumanes/medieval-cards-game/issues"
+  },
+  "homepage": "https://github.com/ToniHumanes/medieval-cards-game#readme"
+}
