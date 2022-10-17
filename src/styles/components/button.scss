@@ -1,0 +1,12 @@
+
+.button{
+    font-family: $alternative-font-family;
+    font-size: rem(20);
+    padding: 14px;
+    border: none;
+    border-radius: $border-radius;
+
+    &--yellow{
+        background-color:  $yellow00;
+    }
+}

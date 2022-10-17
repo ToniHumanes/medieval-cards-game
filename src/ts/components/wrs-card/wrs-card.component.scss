@@ -1,0 +1,134 @@
+
+// Vars
+@import "../../../styles/settings/_colors-vars";
+@import "../../../styles/settings/generic_vars";
+@import "../../../styles/settings/spaces-vars";
+@import "../../../styles/settings/size-vars";
+
+// Tools
+@import "../../../styles/tools/px-to-rem";
+@import "../../../styles/tools/mixins";
+@import "../../../styles/tools/spaces";
+
+/* generics */
+@import '../../../styles/generics/normalize';
+
+/* elements */
+@import '../../../styles/elements/elements';
+
+
+:host{
+    width: 100%;
+}
+.medieval-card {
+    position: relative;
+    margin: 0 auto;
+    background-image: url("assets/images/821.jpg");
+    background-size: contain;
+    background-repeat: repeat;
+    padding: 20px 30px 20px;
+    width: 100%;
+    max-width: rem(500px);
+
+    &>* {
+        position: relative;
+        z-index: 20;
+    }
+
+    &:before {
+        content: "";
+        background-color: rgba($brown00, 0.55);
+        border-radius: $border-radius;
+        z-index: 10;
+        position: absolute;
+        left: 0;
+        top: 0;
+        right: 0;
+        bottom: 0;
+    }
+
+    &__title {
+        font-size: rem(23px);
+        margin-bottom: rem(10px);
+        grid-column: span 2;
+
+        @media (min-width: $screen-md) {
+            font-size: rem(26px);
+        }
+    }
+
+    &__paragraph {
+        font-family: $alternative-font-family;
+        line-height: 2.2rem;
+        font-size: rem(20px);
+        margin-bottom: rem(10px);
+
+        @media (min-width: $screen-md) {
+            font-size: rem(24px);
+        }
+
+        &--small {
+            font-size: rem(18px);
+
+            @media (min-width: $screen-md) {
+                font-size: rem(20px);
+            }
+        }
+
+        &--align-end{
+            text-align: end;
+        }
+    }
+
+    &__picture {
+        display: flex;
+        align-items: end;
+        justify-content: center;
+        background-color: rgba($brown01, 0.7);
+        border: 3px solid $brown02;
+        border-radius: $border-radius;
+        overflow: hidden;
+        margin-bottom: rem(30px);
+    }
+
+    &__image {
+        width: 256px;
+        height: 256px;
+        position: relative;
+        bottom: -11px;
+    }
+
+    &__template-content {
+        display: grid;
+        grid-template-columns: repeat(2, auto);
+        column-gap: 12px;
+        margin-bottom: rem(20px);
+
+        @media (min-width: $screen-md) {
+            grid-template-columns: repeat(2, auto);
+        }
+    }
+
+    &__attacks{
+        margin-bottom: rem(30px);
+    }
+
+    &__attacks-list {
+        padding: 0;
+    }
+
+    &__attacks-list-item {
+        padding: 20px 0px 20px;
+        border-bottom: 2px solid $brown02;
+
+        &:first-of-type {
+            padding-top: 0;
+        }
+    }
+
+    &__footer {
+        display: flex;
+        width: 100%;
+        justify-content: center;
+    }
+}

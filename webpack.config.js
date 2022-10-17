@@ -6,7 +6,7 @@ module.exports = {
     mode: 'development',
     //mode: 'production',  
     entry: {
-        base: './src/js/index.ts'
+        base: './src/ts/index.ts'
     },
     plugins: [
         new HtmlWebpackPlugin({
@@ -29,7 +29,23 @@ module.exports = {
                 loader: "html-loader",
             },
             {
+                test: /\.component.scss$/,
+                exclude: /node_modules/,
+                use: [
+                    "sass-to-string",
+                    {
+                        loader: "sass-loader",
+                        options: {
+                            sassOptions: {
+                                outputStyle: "compressed",
+                            },
+                        },
+                    },
+                ],
+            },
+            {
                 test: /\.scss$/,
+                exclude: [/\.component.scss$/, /node_modules/],
                 use: [
                     MiniCssExtractPlugin.loader,
                     'css-loader',
@@ -39,6 +55,7 @@ module.exports = {
             {
                 test: /\.(png|svg|jpg|jpeg|gif)$/i,
                 type: 'asset/resource',
+                generator: { filename: 'assets/images/[name][ext]' },
             }
         ],
     },

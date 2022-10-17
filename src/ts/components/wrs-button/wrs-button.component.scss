@@ -1,0 +1,19 @@
+
+// Vars
+@import "../../../styles/settings/_colors-vars.scss";
+@import "../../../styles/settings/generic_vars.scss";
+
+// Tools
+@import "../../../styles/tools/px-to-rem";
+
+.button{
+    font-family: $alternative-font-family;
+    font-size: rem(20);
+    padding: 14px;
+    border: none;
+    border-radius: $border-radius;
+
+    &--yellow{
+        background-color:  $yellow00;
+    }
+}

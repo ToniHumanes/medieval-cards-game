@@ -1,0 +1,18 @@
+
+.u-block{
+    display: block!important;
+}
+
+.u-inline-block{
+    display: inline-block!important;
+}
+
+
+.u-hidden{
+    display: none!important;
+    &--sm{
+        @media (min-width: $screen-sm) {
+            display: none!important;
+        }
+    }
+}
