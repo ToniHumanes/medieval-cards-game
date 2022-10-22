@@ -43,7 +43,7 @@ export class WrsList extends HTMLElement {
     }
 
     private template(): string {
-        return `<ul class="wrs-list">${this.attackList}</ul>`;
+        return `<ul class="wrs-list">${this._takeListFormated(this.attackList)}</ul>`;
     }
 
     private templateCss() {
@@ -54,7 +54,7 @@ export class WrsList extends HTMLElement {
         for (const attack of attackList) {
             const attacksCharacter = new Attack({
                 name: attack.name,
-                type: attack.type,
+                types: attack.types,
                 points: attack.points
             });
             const attackTemplate = this.getTemplateAttack(attacksCharacter);
@@ -66,9 +66,18 @@ export class WrsList extends HTMLElement {
     private getTemplateAttack(attack: Attack) {
         return `<li class="wrs-list-item">
                     <p>${attack.name}</p>
-                    <p>Tipo:<span class="u-font-family--emoji">🗡🔥</span></p>
-                    <p>Puntos de daño: ${attack.points}</p>
+                    <p>Tipo: <span class="wrs-list-item__type">${this._takeListFormated(attack.types)}</span></p>
+                    <p>Puntos: ${attack.points}</p>
                 </li>`;
+    }
+
+    private _takeListFormated(types: string[]){
+        let typeLiteral = "";
+        const listTypes = types;
+        listTypes.map((item: string) => {
+            typeLiteral = typeLiteral.concat(item + " ")
+        });
+        return typeLiteral.trim();
     }
 
     private setAttackList(attackList: Attack[]) {

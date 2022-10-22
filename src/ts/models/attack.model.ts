@@ -3,15 +3,38 @@
 export class Attack {
     name: string;
     points: number;
-    type: Array<string>;
+    types: Array<string>;
     
     constructor({
         name,
         points,
-        type
+        types
     }) {
        this.name = name;
        this.points = points;
-       this.type = type; 
+       this.types = this._getTypes(types); 
+    }
+
+    private _getTypes(typesList: Array<string>): Array<string>{
+        const typesListBuilded = [];
+        const listTypesAttacks = {
+            mele: "🗡",
+            fire: "🔥",
+            twister: "🌪",
+            magic: "🔮",
+            ice: "❄️",
+            water: "💧",
+            ray: "⚡️",
+            poison: "🦠"
+
+        }
+        for (const type of typesList) {
+            if(!!listTypesAttacks[type]){
+                typesListBuilded.push(listTypesAttacks[type]);
+            }else{
+                throw Error('This type not exist');
+            }
+        }
+        return typesListBuilded;
     }
 }

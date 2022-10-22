@@ -60,7 +60,7 @@ export class WrsCard extends HTMLElement {
     private _buildProperties(){
         this.propertiesComponent = this.baseComponentBuilder.mapComponentAttributes([
             'name',
-            'type',
+            'types',
             'level',
             '_image',
             'attackList'

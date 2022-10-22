@@ -34,11 +34,21 @@
             padding-top: 0;
         }
 
-        > p:first-child{
-            grid-column: 2 span;
-            margin-bottom: 1rem;
+        >p {
+            &:first-child {
+                grid-column: 2 span;
+                margin-bottom: 1rem;
+            }
+
+            &:last-child {
+                text-align: end;
+            }
         }
 
-     
+        &__type{
+            font-family: $emoji-font-family;
+        }
+
+
     }
 }
