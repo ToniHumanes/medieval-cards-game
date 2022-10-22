@@ -1,6 +1,7 @@
 
 import styles from './wrs-card.component.scss';
 import { BaseComponent } from '../base-component.service';
+import { ParseStringObject } from '../../helpers/parseStringObjetc';
 
 export class WrsCard extends HTMLElement {
 
@@ -15,12 +16,7 @@ export class WrsCard extends HTMLElement {
     }
 
     connectedCallback() {
-        this.propertiesComponent = this.baseComponentBuilder.mapComponentAttributes([
-            'name',
-            'type',
-            'level',
-            '_image'
-        ]);
+        this._buildProperties();
         this.render();
     }
 
@@ -49,9 +45,7 @@ export class WrsCard extends HTMLElement {
         </div>
         <section class="medieval-card__attacks">
             <p class="medieval-card__title">Ataques:</p>
-            <ul class="medieval-card__attacks-list">
-                
-            </ul>
+            <wrs-list contentList='${this.propertiesComponent.attackList.value}'></wrs-list>
         </section>
         <secton class="medieval-card__footer">
             <wrs-button color="yellow" text="Entrenar: +1 punto"></wrs-button>
@@ -61,6 +55,17 @@ export class WrsCard extends HTMLElement {
 
     templateCss() {
         return `<style>${styles}</style>`;
+    }
+
+    private _buildProperties(){
+        this.propertiesComponent = this.baseComponentBuilder.mapComponentAttributes([
+            'name',
+            'type',
+            'level',
+            '_image',
+            'attackList'
+        ]);
+        this.propertiesComponent.attackList.value = ParseStringObject.parse(this.propertiesComponent.attackList.value);
     }
 
 }

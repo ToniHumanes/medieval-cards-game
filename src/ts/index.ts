@@ -3,6 +3,7 @@ import '../styles/styles.scss';
 import { Character } from './models/character.model';
 import { WrsCard } from './components/wrs-card/wrs-card.component';
 import { WrsButton } from './components/wrs-button/wrs-button.component';
+import { WrsList } from './components/wrs-list/wrs-list.component';
 
 class initApp {
 
@@ -17,6 +18,7 @@ class initApp {
         });
         new WrsCard();
         new WrsButton();
+        new WrsList();
     }
 }
 

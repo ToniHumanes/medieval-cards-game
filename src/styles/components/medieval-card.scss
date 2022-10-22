@@ -80,19 +80,6 @@
         }
     }
 
-    &__attacks-list {
-        padding: 0;
-    }
-
-    &__attacks-list-item {
-        padding: 20px 0px 20px;
-        border-bottom: 2px solid $brown02;
-
-        &:first-of-type {
-            padding-top: 0;
-        }
-    }
-
     &__footer {
         display: flex;
         width: 100%;

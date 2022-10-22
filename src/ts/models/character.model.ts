@@ -50,14 +50,13 @@ export class Character {
     }
 
     setTemplateCard() {
-        const nodeElementList = document.querySelector('.js-medieval-card-list');
-        const elementList = document.createElement('div');
-        elementList.classList.add('col-12');
-        elementList.innerHTML = this.getTemplateCard();
-        nodeElementList.append(elementList);
+        // const nodeElementList = document.querySelector('.js-medieval-card-list');
+        // const elementList = document.createElement('div');
+        // elementList.classList.add('col-12');
+        // elementList.innerHTML = this.getTemplateCard();
+        // nodeElementList.append(elementList);
     }
 
-    // crear lista en this.listattack y pasarlo como param
     createAttackList(attackList: Attack[]){
 
         for (const attack of attackList) {
@@ -66,8 +65,8 @@ export class Character {
                 type: attack.type,
                 points: attack.points
             });
-            const attackTemplate = attacksCharacter.getTemplateAttack();
-            this.attackList.push(attackTemplate);  
+            //const attackTemplate = attacksCharacter.getTemplateAttack();
+            //this.attackList.push(attackTemplate);  
         }
 
     }

@@ -1,0 +1,44 @@
+// Vars
+@import "../../../styles/settings/_colors-vars";
+@import "../../../styles/settings/generic_vars";
+@import "../../../styles/settings/spaces-vars";
+@import "../../../styles/settings/size-vars";
+@import "../../../styles/settings/font-sizes-vars";
+// Tools
+@import "../../../styles/tools/px-to-rem";
+@import "../../../styles/tools/mixins";
+@import "../../../styles/tools/spaces";
+
+/* generics */
+@import '../../../styles/generics/normalize';
+
+/* elements */
+@import '../../../styles/elements/elements';
+
+:host {
+    .wrs-list {
+        padding: 0;
+    }
+
+    .wrs-list-item {
+        font-family: $alternative-font-family;
+        font-size: $size--xxs;
+        padding: 20px 0px 20px;
+        margin-left: 1.2rem;
+        border-bottom: 2px solid $brown02;
+
+        grid-template-columns: 1fr 1fr;
+        display: grid;
+
+        &:first-of-type {
+            padding-top: 0;
+        }
+
+        > p:first-child{
+            grid-column: 2 span;
+            margin-bottom: 1rem;
+        }
+
+     
+    }
+}
