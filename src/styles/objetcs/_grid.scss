@@ -26,7 +26,7 @@
 }
 
 [class*=col] {
-    padding: ($gutter / 2);
+    padding: calc($gutter / 2);
 }
 
 .col {
