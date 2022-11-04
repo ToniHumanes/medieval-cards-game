@@ -6,7 +6,7 @@ module.exports = {
     mode: 'development',
     //mode: 'production',  
     entry: {
-        base: './src/ts/index.ts'
+        base: './src/app/index.ts'
     },
     plugins: [
         new HtmlWebpackPlugin({

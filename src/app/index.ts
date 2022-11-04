@@ -1,24 +1,12 @@
 
 import '../styles/styles.scss';
-import { Character } from './models/character.model';
-import { WrsCard } from './components/wrs-card/wrs-card.component';
-import { WrsButton } from './components/wrs-button/wrs-button.component';
-import { WrsList } from './components/wrs-list/wrs-list.component';
+import { AppModule } from './app.module';
+import { ComponentModule } from './components/modules/component.module';
 
 class initApp {
-
     constructor(){
-        this.loadComponents();
-    }
-
-    loadComponents(){
-        new Character({
-            name: 'Antonio',
-            type: 'guerrero'
-        });
-        new WrsCard();
-        new WrsButton();
-        new WrsList();
+        new AppModule();
+        new ComponentModule();
     }
 }
 
