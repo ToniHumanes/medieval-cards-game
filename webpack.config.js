@@ -55,7 +55,9 @@ module.exports = {
             {
                 test: /\.(png|svg|jpg|jpeg|gif)$/i,
                 type: 'asset/resource',
-                generator: { filename: 'assets/images/[name][ext]' },
+                generator: {
+                    filename: 'assets/images/[name][ext]'
+                },
             }
         ],
     },
@@ -65,5 +67,5 @@ module.exports = {
     output: {
         filename: 'main.js',
         path: path.resolve(__dirname, 'dist')
-    },
+    }
 };
