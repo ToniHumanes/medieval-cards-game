@@ -2,6 +2,7 @@
 import styles from './wrs-card.component.scss';
 import { BaseComponent } from '../base-component.service';
 import { ParseStringObject } from '../../helpers/parseStringObjetc';
+import image from '../../../../assets/images/backgrounds/damask-seamless-pattern-background/821.jpg';
 
 export class WrsCard extends HTMLElement {
 
@@ -32,7 +33,7 @@ export class WrsCard extends HTMLElement {
     }
 
     template(): string {
-        return `<article class="medieval-card">
+        return `<article class="medieval-card" style="background-image: url(${image})">
         <section class="medieval-card__template-content">
             <p class="medieval-card__title"> Nombre:
                 ${this.propertiesComponent.name.value}
