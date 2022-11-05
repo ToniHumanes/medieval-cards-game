@@ -1,5 +1,29 @@
 <div class="row">
-    <!-- <wrs-input class="col-12" labelText="Nombre del personaje" type="text" id="characterInput" isRequired="true"></wrs-input> -->
+    
+    <wrs-input class="col-12" labelText="Nombre del personaje" type="text" id="characterInput" isRequired="true"></wrs-input>
+
+    <wrs-select
+        class="col-12"
+        labelText="Tipo del personaje"
+        id="characterselect"
+        isRequired="true"
+        optionDefaultText="selecciona"
+        options='[
+            {
+                "label": "opción 1",
+                "value": "1"
+            },
+            {
+                "label": "opción 2",
+                "value": "2"
+            },
+            {
+                "label": "opción 3",
+                "value": "3"
+            }
+        ]'
+        ></wrs-select>
+
     <wrs-card
         class="col-12"
         name="Antonio"
