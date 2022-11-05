@@ -1,0 +1,39 @@
+
+// Vars
+@import "../../../styles/settings/_colors-vars";
+@import "../../../styles/settings/generic_vars";
+@import "../../../styles/settings/spaces-vars";
+@import "../../../styles/settings/size-vars";
+
+// Tools
+@import "../../../styles/tools/px-to-rem";
+@import "../../../styles/tools/mixins";
+@import "../../../styles/tools/spaces";
+
+/* generics */
+@import '../../../styles/generics/normalize';
+
+/* elements */
+@import '../../../styles/elements/elements';
+
+:host{
+    font-family: $alternative-font-family;
+    font-size: rem(18px);
+    display: grid;
+    .input{
+        &__label{
+            margin-bottom: rem(10px);
+            
+        }
+        &__field{
+            background-color: $brown01;
+            border: 1px solid $brown02;
+            padding: 16px 12px 16px;
+            border-radius: $border-radius;
+
+            &:focus, &:focus-visible, &:focus-within{
+                outline-color: $yellow00;
+            }
+        }
+    }
+}
