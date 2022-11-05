@@ -2,7 +2,6 @@
 export class Router {
     paths: any;
     constructor(paths) {
-        debugger;
         this.paths = paths;
         this.initRouter();
     }
