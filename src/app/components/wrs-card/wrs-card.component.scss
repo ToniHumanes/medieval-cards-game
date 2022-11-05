@@ -28,6 +28,8 @@
     padding: 20px 30px 20px;
     width: 100%;
     max-width: rem(500px);
+    border-radius: $border-radius;
+    box-shadow: 2px 2px 9px 0px rgba($black02, 0.5);
 
     &>* {
         position: relative;
