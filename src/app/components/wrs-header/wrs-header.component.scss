@@ -1,0 +1,30 @@
+
+@import "../../../styles/styles.scss";
+
+.header{
+    padding: rem(16px);
+    background-color: $brown01;
+    display: flex;
+    column-gap: rem(10px);
+
+    button{
+        font-size: rem(16px);
+        font-family: $alternative-font-family;
+        color: $black00;
+        border: none;
+        cursor: pointer;
+        background-color: inherit;
+        display: inline-flex;
+        &:after{
+            content: '|';
+            margin-left: 1rem;
+        }
+        &:last-child::after{
+            content: none;
+        }
+
+        @media (min-width: $screen-sm) {
+            font-size: rem(20px);
+        }
+    }
+}

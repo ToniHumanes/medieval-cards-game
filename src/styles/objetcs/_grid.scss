@@ -7,9 +7,14 @@
 
 .container {
     max-width: $container-max-width;
-    margin: 3rem auto;
-    padding: 0 rem(10px) 3rem;
+    margin: 1rem auto;
+    padding: 0 rem(10px) 2rem;
     width: 100%;
+
+    &--no-margins{
+        margin: 0 auto;
+        padding: 0 rem(10px) 0;
+    }
 }
 
 .row {

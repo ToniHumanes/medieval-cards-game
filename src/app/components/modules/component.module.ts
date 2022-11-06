@@ -4,13 +4,14 @@ import { WrsCard } from "../wrs-card/wrs-card.component";
 import { WrsList } from "../wrs-list/wrs-list.component";
 import { WrsInput } from "../wrs-input/wrs-input.component";
 import { WrsSelect } from "../wrs-select/wrs-select.component";
+import { WrsHeader } from "../wrs-header/wrs-header.component";
 
 export class ComponentModule {
     constructor() {
         this.loadComponents();
     }
     loadComponents(){
-        console.log('loading components...')
+        new WrsHeader();
         new WrsCard();
         new WrsButton();
         new WrsList();
