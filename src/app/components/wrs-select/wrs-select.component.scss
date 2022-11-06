@@ -1,20 +1,5 @@
 
-// Vars
-@import "../../../styles/settings/_colors-vars";
-@import "../../../styles/settings/generic_vars";
-@import "../../../styles/settings/spaces-vars";
-@import "../../../styles/settings/size-vars";
-
-// Tools
-@import "../../../styles/tools/px-to-rem";
-@import "../../../styles/tools/mixins";
-@import "../../../styles/tools/spaces";
-
-/* generics */
-@import '../../../styles/generics/normalize';
-
-/* elements */
-@import '../../../styles/elements/elements';
+@import "../../../styles/styles.scss";
 
 :host{
     font-family: $alternative-font-family;

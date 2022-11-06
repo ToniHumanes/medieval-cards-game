@@ -1,16 +1,5 @@
 
-// Vars
-@import "../../../styles/settings/_colors-vars.scss";
-@import "../../../styles/settings/generic_vars.scss";
-
-// Tools
-@import "../../../styles/tools/px-to-rem";
-
-/* generics */
-@import '../../../styles/generics/normalize';
-
-/* elements */
-@import '../../../styles/elements/elements';
+@import "../../../styles/styles.scss";
 
 .button{
     font-family: $alternative-font-family;
