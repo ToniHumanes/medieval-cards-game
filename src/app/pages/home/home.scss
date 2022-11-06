@@ -6,12 +6,26 @@
         display: grid;
         width: 100%;
         grid-template-columns: 1fr;
-        row-gap: rem(5px);
+        row-gap: rem(16px);
 
         @media (min-width: $screen-md) {
-            grid-template-columns: 1fr 1fr auto;
-            align-items: end;
-            row-gap: initial;
+            grid-template-columns: 1fr 1fr;
+            grid-template-areas: "input select" "button button";
+            align-items: baseline;
+            column-gap: rem(16px);
+
+            > wrs-input{
+                grid-area: input;
+            }
+
+            > wrs-select{
+                grid-area: select;
+            }
+
+            > wrs-button{
+                grid-area: button;
+            }
+
         }
     }
 }
