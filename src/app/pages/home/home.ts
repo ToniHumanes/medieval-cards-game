@@ -87,11 +87,20 @@ export class HomePage extends HTMLElement {
     private sendForm(){
         const valuesForm = this.getFormValues();
         if(valuesForm){
-            this.inputSelector.value = '';
-            this.selectSelector.value = this.selectSelector[0];
-            this.selectSelector[0].selected = true;
+            this.resetForm();
             this.createCharacter(valuesForm);
+            this.closeForm();
         }
+    }
+
+    private resetForm(){
+        this.inputSelector.value = '';
+        this.selectSelector.value = this.selectSelector[0];
+        this.selectSelector[0].selected = true;
+    }
+
+    private closeForm(){
+        this.shadowRoot.querySelector('form').remove();
     }
 
     private checkIsValidForm(formFields){
