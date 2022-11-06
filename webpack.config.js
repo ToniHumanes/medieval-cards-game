@@ -29,7 +29,7 @@ module.exports = {
                 loader: "html-loader",
             },
             {
-                test: /\.component.scss$/,
+                test: [/\.component.scss$/, /\home.scss$/],
                 exclude: /node_modules/,
                 use: [
                     "sass-to-string",
@@ -45,7 +45,7 @@ module.exports = {
             },
             {
                 test: /\.scss$/,
-                exclude: [/\.component.scss$/, /node_modules/],
+                exclude: [/\.component.scss$/, /\home.scss$/ ,/node_modules/],
                 use: [
                     MiniCssExtractPlugin.loader,
                     'css-loader',
@@ -56,7 +56,7 @@ module.exports = {
                 test: /\.(png|svg|jpg|jpeg|gif)$/i,
                 type: 'asset/resource',
                 generator: {
-                    filename: 'assets/images/[name][ext]'
+                    filename: '[path][name][ext]'
                 },
             }
         ],

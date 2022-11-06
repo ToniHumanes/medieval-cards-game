@@ -1,10 +1,10 @@
 
-import home from '../pages/home/home.html';
+//import home from '../pages/home/home.html';
 
 export const PATHS = {
     home: {
         path: "/",
-        template: home,
+        template: `<home-page></home-page>`,
     },
     about: {
         path: "/about",

@@ -6,6 +6,12 @@
 // Tools
 @import "../../../styles/tools/px-to-rem";
 
+/* generics */
+@import '../../../styles/generics/normalize';
+
+/* elements */
+@import '../../../styles/elements/elements';
+
 .button{
     font-family: $alternative-font-family;
     font-size: rem(20);

@@ -7,6 +7,7 @@ export class WrsButton extends HTMLElement {
     shadowDOM: ShadowRoot;
     baseComponentBuilder: BaseComponent;
     propertiesComponent: any;
+    button: HTMLButtonElement;
 
     constructor() {
         super();
@@ -20,9 +21,11 @@ export class WrsButton extends HTMLElement {
             'text',
         ]);
         this.render();
+        //this.createEvents();
     }
 
     disconnectedCallback() {
+        //this.removeEvents();
         this.remove();
     }
 
@@ -40,6 +43,35 @@ export class WrsButton extends HTMLElement {
     templateCss() {
         return `<style>${styles}</style>`;
     }
+
+    // handleEvent(event) {
+    //     debugger;
+    //     if (event.type === "click"){
+    //         console.log('component button event:', event);
+    //         this.emitEvents();
+    //     }
+    //   }
+
+    // createEvents(){
+    //     // this.button = this.shadowRoot.querySelector("button");
+    //     // this.button.addEventListener("click", this); 
+    // }
+
+    // emitEvents(){
+    //     const MessageEvent = new CustomEvent("message", {
+    //         detail: {
+    //           from: "Manz",
+    //           message: "Hello!"
+    //         },
+    //         bubbles: true,
+    //         composed: true
+    //       });
+    //       this.dispatchEvent(MessageEvent);
+    // }
+
+    // removeEvents(){
+    //     this.button.removeEventListener('click', this)
+    // }
 
 }
 

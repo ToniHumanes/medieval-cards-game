@@ -1,12 +1,10 @@
 
 import '../styles/styles.scss';
 import { AppModule } from './app.module';
-import { ComponentModule } from './components/modules/component.module';
 
 class initApp {
     constructor(){
         new AppModule();
-        new ComponentModule();
     }
 }
 

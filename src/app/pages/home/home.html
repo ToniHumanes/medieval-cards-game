@@ -1,43 +1,31 @@
-<div class="row">
-    
-    <wrs-input class="col-12" labelText="Nombre del personaje" type="text" id="characterInput" isRequired="true"></wrs-input>
-
-    <wrs-select
-        class="col-12"
-        labelText="Tipo del personaje"
-        id="characterselect"
-        isRequired="true"
-        optionDefaultText="selecciona"
-        options='[
-            {
-                "label": "opción 1",
-                "value": "1"
-            },
-            {
-                "label": "opción 2",
-                "value": "2"
-            },
-            {
-                "label": "opción 3",
-                "value": "3"
-            }
-        ]'
-        ></wrs-select>
-
-    <wrs-card
-        class="col-12"
-        name="Antonio"
-        type="guerrero"
-        level="1"
-        _image="./assets/images/swordsman.png"
-        attackList='[{
-            "name": "Corte de la espada de fuego",
-            "types": ["mele", "fire"],
-            "points": "100"
-        },{
-            "name": "Corte de la espada de hielo",
-            "types": ["mele", "water"],
-            "points": "2000"
-        }]'>
-    </wrs-card>
-</div>
+<form action="" class="form">
+    <section class="row">
+        <div class="col-12 u-margin-bottom-20px">
+            <h1 class="u-margin-bottom-20px">Bienvenido al increible juego de Entrena a tu propio Guerrero.</h1>
+            <p class="u-font-family--noto u-margin-bottom-10px">En este juego podrás elegir el tipo de personaje que deseas entrenar e incluso ponerle nombre.</p>
+            <p class="u-font-family--noto">Sigue los pasos y dale al botón "crear" para empezar, tu Heroe te espera.</p>
+        </div>
+        <div class="form__content">
+            <wrs-input class="col-12" labelText="Nombre del personaje" type="text" id="characterInput" isRequired="true">
+            </wrs-input>
+            <wrs-select class="col-12" labelText="Tipo del personaje" id="characterselect" isRequired="true"
+                optionDefaultText="selecciona" options='[
+                    {
+                        "label": "Guerrero",
+                        "value": "1"
+                    },
+                    {
+                        "label": "Guerrera",
+                        "value": "2"
+                    },
+                    {
+                        "label": "Mago",
+                        "value": "3"
+                    }
+                ]'></wrs-select>
+            <div class="col-12 col-12 u-flex u-flex-justify--end">
+                <wrs-button text="crear" color="yellow"></wrs-button>
+            </div>
+        </div>
+    </section>
+</form>

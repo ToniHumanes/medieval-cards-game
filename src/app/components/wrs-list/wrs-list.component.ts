@@ -2,7 +2,6 @@
 
 import styles from './wrs-list.component.scss';
 import { BaseComponent } from '../base-component.service';
-import { Attack } from '../../models/attack.model';
 import { ParseStringObject } from '../../helpers/parseStringObjetc';
 
 export class WrsList extends HTMLElement {
@@ -50,20 +49,20 @@ export class WrsList extends HTMLElement {
         return `<style>${styles}</style>`;
     }
 
-    private createAttackList(attackList: Attack[]) {
+    private createAttackList(attackList) {
         for (const attack of attackList) {
-            const attacksCharacter = new Attack({
+            const attacksCharacter = {
                 name: attack.name,
                 types: attack.types,
                 points: attack.points
-            });
+            };
             const attackTemplate = this.getTemplateAttack(attacksCharacter);
             this.attackList.push(attackTemplate);
         }
 
     }
 
-    private getTemplateAttack(attack: Attack) {
+    private getTemplateAttack(attack) {
         return `<li class="wrs-list-item">
                     <p>${attack.name}</p>
                     <p>Tipo: <span class="wrs-list-item__type">${this._takeListFormated(attack.types)}</span></p>
@@ -80,7 +79,7 @@ export class WrsList extends HTMLElement {
         return typeLiteral.trim();
     }
 
-    private setAttackList(attackList: Attack[]) {
+    private setAttackList(attackList) {
         if(attackList.length > 0){
             this.createAttackList(attackList);
             for (const itemAttack of attackList) {

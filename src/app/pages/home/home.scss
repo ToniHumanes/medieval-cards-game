@@ -1,0 +1,17 @@
+
+@import "../../../styles/styles.scss";
+
+.form {
+    &__content {
+        display: grid;
+        width: 100%;
+        grid-template-columns: 1fr;
+        row-gap: rem(5px);
+
+        @media (min-width: $screen-md) {
+            grid-template-columns: 1fr 1fr auto;
+            align-items: end;
+            row-gap: initial;
+        }
+    }
+}
