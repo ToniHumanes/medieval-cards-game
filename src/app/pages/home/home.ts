@@ -7,6 +7,10 @@ export class HomePage extends HTMLElement {
 
     shadowDOM: ShadowRoot;
     button: HTMLButtonElement;
+    inputComponentSelector: any;
+    inputSelector: any;
+    selectComponentSelector: any;
+    selectSelector: any;
 
     constructor() {
         super();
@@ -57,25 +61,25 @@ export class HomePage extends HTMLElement {
     //  Form
     private getFormValues(){
 
-        const inputComponentSelector = this.shadowRoot.querySelector('wrs-input');
-        const inputSelector = inputComponentSelector.shadowRoot.querySelector('input');
+        this.inputComponentSelector = this.shadowRoot.querySelector('wrs-input');
+        this.inputSelector = this.inputComponentSelector.shadowRoot.querySelector('input');
 
-        const selectComponentSelector = this.shadowRoot.querySelector('wrs-select');
-        const selectSelector = selectComponentSelector.shadowRoot.querySelector('select');
+        this.selectComponentSelector = this.shadowRoot.querySelector('wrs-select');
+        this.selectSelector = this.selectComponentSelector.shadowRoot.querySelector('select');
 
         const isValidForm = this.checkIsValidForm({
             input: {
-                inputComponentSelector,
-                inputSelector
+                inputComponentSelector: this.inputComponentSelector,
+                inputSelector: this.inputSelector
             },
             select: {
-                selectComponentSelector,
-                selectSelector
+                selectComponentSelector: this.selectComponentSelector,
+                selectSelector: this.selectSelector
             }});
             if(isValidForm){
                 return{
-                    inputValue: inputSelector.value,
-                    selectValue: selectSelector.value
+                    inputValue: this.inputSelector.value,
+                    selectValue: this.selectSelector.value
                 }
             }
     }
@@ -83,6 +87,9 @@ export class HomePage extends HTMLElement {
     private sendForm(){
         const valuesForm = this.getFormValues();
         if(valuesForm){
+            this.inputSelector.value = '';
+            this.selectSelector.value = this.selectSelector[0];
+            this.selectSelector[0].selected = true;
             this.createCharacter(valuesForm);
         }
     }

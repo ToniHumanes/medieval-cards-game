@@ -34,6 +34,10 @@
             &:focus, &:focus-visible, &:focus-within{
                 outline-color: $yellow00;
             }
+
+            &::placeholder{
+                color: $black00;
+            }
         }
     }
 

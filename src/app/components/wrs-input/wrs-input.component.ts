@@ -38,7 +38,7 @@ export class WrsInput extends HTMLElement{
     template(): string {
         return `
         <label class="input__label" for="${this.propertiesComponent.id.value}">${this.propertiesComponent.labelText.value}</label>
-        <input class="input__field" type="${this.propertiesComponent.type.value}" id="${this.propertiesComponent.id.value}" name="${this.propertiesComponent.id.value}" required="${this.propertiesComponent.isRequired.value}">`;
+        <input class="input__field" placeholder="${this.propertiesComponent.placeholder.value}" type="${this.propertiesComponent.type.value}" id="${this.propertiesComponent.id.value}" name="${this.propertiesComponent.id.value}" required="${this.propertiesComponent.isRequired.value}">`;
     }
 
     templateCss() {
