@@ -9,6 +9,7 @@ export class WrsCard extends HTMLElement {
     shadowDOM: ShadowRoot;
     baseComponentBuilder: BaseComponent;
     propertiesComponent: any;
+    button: HTMLButtonElement;
 
     constructor() {
         super();
@@ -19,9 +20,11 @@ export class WrsCard extends HTMLElement {
     connectedCallback() {
         this._buildProperties();
         this.render();
+        this.createEvent();
     }
 
     disconnectedCallback() {
+        this.removeEvent();
         this.remove();
     }
 
@@ -49,7 +52,7 @@ export class WrsCard extends HTMLElement {
             <wrs-list contentList='${this.propertiesComponent.attackList.value}'></wrs-list>
         </section>
         <secton class="medieval-card__footer">
-            <wrs-button color="yellow" text="Entrenar: +1 punto"></wrs-button>
+            <wrs-button color="yellow" text="Entrenar"></wrs-button>
         </secton>
     </article>`;
     }
@@ -68,6 +71,25 @@ export class WrsCard extends HTMLElement {
         ]);
         this.propertiesComponent.attackList.value = ParseStringObject.parse(this.propertiesComponent.attackList.value);
     }
+
+    handleEvent(event) {
+        if (event.type === "click") {
+          const LevelUpEvent = new CustomEvent("level-up-event", {
+            bubbles: true,
+            composed: true
+          });
+          this.dispatchEvent(LevelUpEvent);
+        }
+      }
+    
+      createEvent(){
+        this.button = this.shadowRoot.querySelector('wrs-button').shadowRoot.querySelector('button');
+        this.button.addEventListener("click", this);
+      }
+
+      removeEvent(){
+        this.button.removeEventListener("click", this);
+      }
 
 }
 

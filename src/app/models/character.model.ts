@@ -19,31 +19,40 @@ export class Character {
         this.name = name;
         this.type = type;
         this.level = 1;
-        this.attackList = this.getAttacks();
-        this.image = this.getImage(this.type);
+        this.attackList = this.getAttacks([
+            {
+                "name": "Corte de la espada de fuego",
+                "types": ["mele", "fire"],
+                "points": "100"
+            }
+        ]);
+        this.image = this.getImage(this.type, {
+            imageWarrior,
+            imageWarriorFemale,
+            imageWizard
+        });
         this.transformLiteralsTypes();
-
     }
 
-    private getImage(type: string) {
+    getImage(type: string, images) {
         const typeWarrior = {
-            1: imageWarrior,
-            2: imageWarriorFemale,
-            3: imageWizard
+            1: images.imageWarrior,
+            2: images.imageWarriorFemale,
+            3: images.imageWizard
         }
         return typeWarrior[type];
     }
 
-    private getAttacks() {
-        const attackItem = new Attack({
-            "name": "Corte de la espada de fuego",
-            "types": ["mele", "fire"],
-            "points": "100"
+    getAttacks(attacks) {
+        const attacksList = [];
+        attacks.map( attack => {
+            const attackItem = new Attack(attack);
+            attacksList.push(attackItem);
         });
-        return [attackItem];
+        return attacksList;
     }
 
-    private transformLiteralsTypes(){
+    transformLiteralsTypes(){
         const typeWarrior = {
             1: 'Guerrero',
             2: 'Guerrera',
