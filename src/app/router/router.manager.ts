@@ -17,8 +17,15 @@ export class Router {
         const { path, template } = paths[page] || paths.error;
         const $CONTAINER = document.querySelector("#content");
         if($CONTAINER){
+            this.removeLastPage($CONTAINER);
             $CONTAINER.innerHTML = template;
             window.history.pushState({}, "done", path);
+        }
+    }
+
+    private removeLastPage(container){
+        if(container.children.length > 0){
+            container.children[0].remove();
         }
     }
 }

@@ -1,5 +1,9 @@
 
+import { Boss } from '../../models/boss.model';
+import { Captain } from '../../models/captain.model';
 import { Character } from '../../models/character.model';
+import { Recruit } from '../../models/recruit.model';
+import { Soldier } from '../../models/soldier.model';
 import home from './home.html'
 import styles from './home.scss';
 
@@ -11,6 +15,8 @@ export class HomePage extends HTMLElement {
     inputSelector: any;
     selectComponentSelector: any;
     selectSelector: any;
+    levelUpEmmited: number;
+    valuesForm: { inputValue: string; selectValue: string; };
 
     constructor() {
         super();
@@ -20,9 +26,11 @@ export class HomePage extends HTMLElement {
     connectedCallback() {
         this.render();
         this.setFormEvent();
+        this.createEventLevelUp();
     }
 
     disconnectedCallback() {
+        this.removeEvents();
         this.remove();
     }
 
@@ -41,7 +49,9 @@ export class HomePage extends HTMLElement {
         return `<style>${styles}</style>`;
     }
 
+    // ********************************* 
     // Events
+    // ********************************* 
 
     setFormEvent(){
         this.button = this.shadowRoot.querySelector('wrs-button').shadowRoot.querySelector('button');
@@ -52,13 +62,25 @@ export class HomePage extends HTMLElement {
         if (event.type === "click") {
             this.sendForm();
         }
+
+        if (event.type === "level-up-event") {
+            this.levelUpCharacterController();
+        }
+    }
+
+    createEventLevelUp() {
+        document.addEventListener("level-up-event", this);
     }
 
     removeEvents(){
-        this.button.removeEventListener('click', this)
+        this.button.removeEventListener('click', this);
+        document.removeEventListener("level-up-event", this);
     }
 
-    //  Form
+    // ********************************* 
+    // Form
+    // ********************************* 
+
     private getFormValues(){
 
         this.inputComponentSelector = this.shadowRoot.querySelector('wrs-input');
@@ -85,10 +107,10 @@ export class HomePage extends HTMLElement {
     }
 
     private sendForm(){
-        const valuesForm = this.getFormValues();
-        if(valuesForm){
+        this.valuesForm = this.getFormValues();
+        if(this.valuesForm){
             this.resetForm();
-            this.createCharacter(valuesForm);
+            this.createCharacter(this.valuesForm);
             this.closeForm();
         }
     }
@@ -138,13 +160,22 @@ export class HomePage extends HTMLElement {
         }
     }
 
+    // ********************************* 
+    // Character
+    // ********************************* 
+
     private createCharacter(dataCharecter){
         const character = new Character({
             name: dataCharecter.inputValue,
             type: dataCharecter.selectValue
         });
+        this.setTemplateCharacter(character);
+    }
+
+    setTemplateCharacter(character: Character){
         const elementSection = document.createElement('section');
         elementSection.classList.add('col-12');
+        elementSection.id = 'warriorSection'
         elementSection.innerHTML = `
         <wrs-card
             name="${character.name}"
@@ -153,7 +184,36 @@ export class HomePage extends HTMLElement {
             _image="${character.image}"
             attackList='${JSON.stringify(character.attackList)}'>
         </wrs-card>`
-        this.shadowRoot.appendChild(elementSection);
+        this.shadowRoot.append(elementSection);
+    }
+
+    levelUpCharacterController(){
+        this.levelUpEmmited = !!this.levelUpEmmited ? this.levelUpEmmited + 1 : 1;
+        const propertiesObject = {
+            enumerable: false,
+            writable: false,
+            configurable: false
+        };
+        const valuesCharacter = Object.create(null, {
+            name: { value: this.valuesForm.inputValue, ...propertiesObject },
+            type: { value: this.valuesForm.selectValue, ...propertiesObject }
+        });
+        const levelControllerMethods = [
+            { methodClass: Recruit, eventEmitNumber: 5 },
+            { methodClass: Soldier, eventEmitNumber: 10 },
+            { methodClass: Captain, eventEmitNumber: 15 },
+            { methodClass: Boss, eventEmitNumber: 20 }
+        ];
+        const levelControllerMethodsAsArray = Object.entries(levelControllerMethods)
+        const methodLevelFinded = levelControllerMethodsAsArray.find( (item: any) => {
+           return item[1].eventEmitNumber === this.levelUpEmmited 
+        });
+
+        if(!!methodLevelFinded){
+            const characterModel = new methodLevelFinded[1].methodClass(valuesCharacter);
+            this.shadowRoot.querySelector('#warriorSection').remove();
+            this.setTemplateCharacter(characterModel);
+        }
     }
 
 }
