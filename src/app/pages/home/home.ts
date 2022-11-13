@@ -17,16 +17,23 @@ export class HomePage extends HTMLElement {
     selectSelector: any;
     levelUpEmmited: number;
     valuesForm: { inputValue: string; selectValue: string; };
+    timeToTrainlevelUpList = {
+        levelRecluit: 2,
+        levelSoldier: 5,
+        levelCaptain: 7,
+        levelBoss: 10
+    };
 
     constructor() {
         super();
+
         this.shadowDOM = this.attachShadow({ mode: 'open' });
     }
 
     connectedCallback() {
         this.render();
         this.setFormEvent();
-        this.createEventLevelUp();
+        this.createEvents();
     }
 
     disconnectedCallback() {
@@ -66,15 +73,39 @@ export class HomePage extends HTMLElement {
         if (event.type === "level-up-event") {
             this.levelUpCharacterController();
         }
+
+        if(event.type === "end-game-event"){
+            this.shadowRoot.querySelector('wrs-banner-animation').setAttribute('isactive', 'true');
+        }
+
+        if(event.type === "button-banner"){
+            window['ROUTER'].load('home');
+        }
+    }
+
+    createEvents() {
+        this.createEventsEndGame();
+        this.createEventLevelUp();
+        this.createEventRedirect();
+    }
+
+    createEventsEndGame() {
+        document.addEventListener("end-game-event", this);
     }
 
     createEventLevelUp() {
         document.addEventListener("level-up-event", this);
     }
 
+    createEventRedirect(){
+        document.addEventListener("button-banner", this);
+    }
+
     removeEvents(){
         this.button.removeEventListener('click', this);
         document.removeEventListener("level-up-event", this);
+        document.removeEventListener("end-game-event", this);
+        document.removeEventListener("button-banner", this);
     }
 
     // ********************************* 
@@ -199,10 +230,10 @@ export class HomePage extends HTMLElement {
             type: { value: this.valuesForm.selectValue, ...propertiesObject }
         });
         const levelControllerMethods = [
-            { methodClass: Recruit, eventEmitNumber: 5 },
-            { methodClass: Soldier, eventEmitNumber: 10 },
-            { methodClass: Captain, eventEmitNumber: 15 },
-            { methodClass: Boss, eventEmitNumber: 20 }
+            { methodClass: Recruit, eventEmitNumber: this.timeToTrainlevelUpList.levelRecluit },
+            { methodClass: Soldier, eventEmitNumber: this.timeToTrainlevelUpList.levelSoldier },
+            { methodClass: Captain, eventEmitNumber: this.timeToTrainlevelUpList.levelCaptain },
+            { methodClass: Boss, eventEmitNumber: this.timeToTrainlevelUpList.levelBoss }
         ];
         const levelControllerMethodsAsArray = Object.entries(levelControllerMethods)
         const methodLevelFinded = levelControllerMethodsAsArray.find( (item: any) => {
@@ -213,6 +244,14 @@ export class HomePage extends HTMLElement {
             const characterModel = new methodLevelFinded[1].methodClass(valuesCharacter);
             this.shadowRoot.querySelector('#warriorSection').remove();
             this.setTemplateCharacter(characterModel);
+        }
+
+        if(this.levelUpEmmited > this.timeToTrainlevelUpList.levelBoss){
+            const endGameEvent = new CustomEvent("end-game-event", {
+                bubbles: true,
+                composed: true
+              });
+              this.dispatchEvent(endGameEvent);
         }
     }
 

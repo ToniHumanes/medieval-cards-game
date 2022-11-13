@@ -5,6 +5,7 @@ import { WrsList } from "../wrs-list/wrs-list.component";
 import { WrsInput } from "../wrs-input/wrs-input.component";
 import { WrsSelect } from "../wrs-select/wrs-select.component";
 import { WrsHeader } from "../wrs-header/wrs-header.component";
+import { WrsBannerAnimation } from "../wrs-banner-animation/wrs-banner-animation.component";
 
 export class ComponentModule {
     constructor() {
@@ -17,5 +18,6 @@ export class ComponentModule {
         new WrsList();
         new WrsInput();
         new WrsSelect();
+        new WrsBannerAnimation;
     }
 }

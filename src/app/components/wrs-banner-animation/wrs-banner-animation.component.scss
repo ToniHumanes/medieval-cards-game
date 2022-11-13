@@ -1,0 +1,50 @@
+
+@import "../../../styles/styles.scss";
+
+:host{
+    .banner-animation{
+        font-family: $alternative-font-family;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        row-gap: rem(25px);
+        border-top-left-radius: $border-radius;
+        border-top-right-radius: $border-radius;
+        box-shadow: 0px 1px 20px 0px rgba($black02, 0.5);
+        padding: 20px 5px 20px;
+        height: 100vmax;
+        position: absolute;
+        top: -100vmax;
+        left: 0;
+        right: 0;
+        background-color: $white00;
+        z-index: 100;
+
+        &--active{
+            animation: moveUp .5s cubic-bezier(0.165, 0.840, 0.440, 1.000) forwards;
+        }
+
+        &__text{
+            max-width: 70%;
+            margin: 0 auto;
+            display: block;
+            font-size: rem(18px);
+        }
+
+        &__icon{
+            font-family: $emoji-font-family;
+            font-size: rem(62px);
+        }
+    }
+}
+
+@keyframes moveUp {
+    0% {
+      top: -100%;
+    }
+    100% {
+      top: 0;
+    }
+  }
