@@ -1,0 +1,17 @@
+[
+    {
+        "name": "Posesión del pensamiento",
+        "types": ["magic", "terror", "mindControl"],
+        "points": "800"
+    },
+    {
+        "name": "Muro mágico protector reforzado",
+        "types": ["magic", "shield"],
+        "points": "400"
+    },
+    {
+        "name": "Infierno desatado",
+        "types": ["magic", "fire", "twister"],
+        "points": "350"
+    }
+]

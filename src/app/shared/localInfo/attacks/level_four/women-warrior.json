@@ -1,0 +1,17 @@
+[
+    {
+        "name": "Espadazo letal",
+        "types": ["mele", "terror"],
+        "points": "300"
+    },
+    {
+        "name": "Conjuro del infierno",
+        "types": ["magic", "fire"],
+        "points": "380"
+    },
+    {
+        "name": "Tornado de la ventisca eterna",
+        "types": ["mele", "ice", "twister", "water"],
+        "points": "480"
+    }
+]

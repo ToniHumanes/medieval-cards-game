@@ -5,6 +5,10 @@ import imageWizard from '/assets/images/characters/wizard_warriors/level_one.png
 
 import { Attack } from '../../app/models/attack.model';
 
+import * as menWarriorsJson from '../shared/localInfo/attacks/level_one/men-warrior.json';
+import * as womenWarriorsJson from '../shared/localInfo/attacks/level_one/women-warrior.json';
+import * as wizardWarriorsJson from '../shared/localInfo/attacks/level_one/wizard-warrior.json';
+
 export class Character {
     name: string;
     type: string;
@@ -19,13 +23,7 @@ export class Character {
         this.name = name;
         this.type = type;
         this.level = 1;
-        this.attackList = this.getAttacks([
-            {
-                "name": "Corte de la espada de fuego",
-                "types": ["mele", "fire"],
-                "points": "100"
-            }
-        ]);
+        this.attackList = this.getAttacks(menWarriorsJson, womenWarriorsJson, wizardWarriorsJson);
         this.image = this.getImage(this.type, {
             imageWarrior,
             imageWarriorFemale,
@@ -43,7 +41,16 @@ export class Character {
         return typeWarrior[type];
     }
 
-    getAttacks(attacks) {
+    getAttacks(menWarriorsJson, womenWarriorsJson, wizardWarriorsJson){
+        const attackLibrary = {
+            "1": menWarriorsJson,
+            "2": womenWarriorsJson,
+            "3": wizardWarriorsJson
+        };
+       return this.mapAttacks(attackLibrary[this.type].default); 
+    }
+
+   private mapAttacks(attacks) {
         const attacksList = [];
         attacks.map( attack => {
             const attackItem = new Attack(attack);

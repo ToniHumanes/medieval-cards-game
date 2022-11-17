@@ -1,0 +1,12 @@
+[
+    {
+        "name": "Ataque segador de almas",
+        "types": ["magic", "fire", "rock", "water", "twister"],
+        "points": "900"
+    },
+    {
+        "name": "Muro de protección mágico del rey",
+        "types": ["shield", "magic", "terror"],
+        "points": "600"
+    }
+]

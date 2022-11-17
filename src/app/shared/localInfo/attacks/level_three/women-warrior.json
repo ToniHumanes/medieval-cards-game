@@ -1,0 +1,12 @@
+[
+    {
+        "name": "Escudo de protección congelador",
+        "types": ["shield", "ice"],
+        "points": "240"
+    },
+    {
+        "name": "Corte de la espada del trueno",
+        "types": ["mele", "ray", "twister"],
+        "points": "300"
+    }
+]

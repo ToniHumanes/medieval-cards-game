@@ -92,7 +92,9 @@ export class WrsBannerAnimation extends HTMLElement {
     }
 
     removeEventButton() {
-        this.button.removeEventListener('click', this);
+        if(this.button){
+            this.button.removeEventListener('click', this);
+        }
     }
 }
 

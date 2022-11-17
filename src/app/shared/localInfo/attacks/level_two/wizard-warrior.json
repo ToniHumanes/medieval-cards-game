@@ -1,0 +1,12 @@
+[
+    {
+        "name": "lanzamiento del rayo devastador ",
+        "types": ["magic", "ray", "distance"],
+        "points": "200"
+    },
+    {
+        "name": "Mil dagas aladas",
+        "types": ["magic", "mele", "distance"],
+        "points": "300"
+    }
+]

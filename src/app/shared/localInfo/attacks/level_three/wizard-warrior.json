@@ -1,0 +1,17 @@
+[
+    {
+        "name": "Presencia tenebrosa",
+        "types": ["magic", "terror"],
+        "points": "300"
+    },
+    {
+        "name": "Muro mágico protector envenenado",
+        "types": ["magic", "shield", "poison"],
+        "points": "200"
+    },
+    {
+        "name": "Tempestad",
+        "types": ["magic", "ray", "twister"],
+        "points": "350"
+    }
+]

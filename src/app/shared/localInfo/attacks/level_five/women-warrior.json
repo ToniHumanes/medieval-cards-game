@@ -1,0 +1,12 @@
+[
+    {
+        "name": "Ataque posesión mental",
+        "types": ["mindControl", "magic"],
+        "points": "800"
+    },
+    {
+        "name": "Ataque de los elementos",
+        "types": ["water", "rock", "twister", "ice", "magic"],
+        "points": "880"
+    }
+]

@@ -25,7 +25,13 @@ export class Attack {
             ice: "❄️",
             water: "💧",
             ray: "⚡️",
-            poison: "🦠"
+            poison: "🤢",
+            distance: "🏹",
+            terror: "😱",
+            rock: "⛰",
+            shield: "🛡",
+            mindControl: "🧠",
+            sun: "☀"
 
         }
         for (const type of typesList) {
