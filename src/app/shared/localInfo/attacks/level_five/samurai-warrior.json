@@ -1,0 +1,17 @@
+[
+    {
+        "name": "ninjutsu nivel extremo",
+        "types": ["mele", "terror", "distance"],
+        "points": "800"
+    },
+    {
+        "name": "Fuego del Purgartorio",
+        "types": ["volcano", "fire", "dark", "magic"],
+        "points": "900"
+    },
+    {
+        "name": "Arrebatar almas",
+        "types": ["mindControl", "shield", "dark", "magic"],
+        "points": "1000"
+    }
+]
