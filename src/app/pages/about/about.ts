@@ -1,17 +1,14 @@
 
-import styles from './wrs-header.component.scss';
+import about from './about.html'
+import styles from './about.scss';
 
-export class WrsHeader extends HTMLElement {
-
+export class AboutPage extends HTMLElement {
     shadowDOM: ShadowRoot;
-
-
 
     constructor() {
         super();
         this.shadowDOM = this.attachShadow({ mode: 'open' });
     }
-
     connectedCallback() {
         this.render();
     }
@@ -28,12 +25,7 @@ export class WrsHeader extends HTMLElement {
     }
 
     template(): string {
-        return `<header class="header">
-        <nav class="container container--no-margins">
-        <button id="Home" onclick="ROUTER.load('home')">Inicio </button>
-        <button id="About" onclick="ROUTER.load('about')">Sobre mi</button>
-        </nav>
-    </header>`;
+        return about;
     }
 
     templateCss() {
@@ -41,5 +33,4 @@ export class WrsHeader extends HTMLElement {
     }
 }
 
-window.customElements.define('wrs-header', WrsHeader);
-
+window.customElements.define('about-page', AboutPage);

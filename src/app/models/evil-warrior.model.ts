@@ -3,7 +3,7 @@
 import { Character } from "./character.model";
 import imageEvilWarrior from '/assets/images/characters/evil_warriors/level_one.png';
 
-import * as evilWarriorsJson from '../shared/localInfo/attacks/level_two/men-warrior.json';
+import * as evilWarriorsJson from '../shared/localInfo/attacks/evil-warrior/evil-warrior.json';
 
 export class EvilWarrior extends Character{
     constructor(character) { 

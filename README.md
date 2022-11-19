@@ -1,8 +1,8 @@
-# Aplicación web para consejos psicológicos.
+# Juego de Cartas Medievales y de Fantasia.
 
 * El proyecto se ha realizado con las siguientes tecnologías:
 
-**HTML5, CSS3, SCSS, ITCSS ARQUITECTURE, TYPESCRIPT, VANILLA JAVASCRIPT, RXJS.**
+**HTML5, CSS3, SCSS, ITCSS ARQUITECTURE, TYPESCRIPT, VANILLA JAVASCRIPT, WEB COMPONENTS.**
 
 * El proyecto se compila con webpack y se deberán seguir los siguientes pasos para su correcta instalación:
 

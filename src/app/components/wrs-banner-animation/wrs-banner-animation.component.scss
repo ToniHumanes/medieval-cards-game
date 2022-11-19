@@ -1,6 +1,9 @@
 
 @import "../../../styles/styles.scss";
 
+:root{
+    --height-body: 100%
+}
 :host{
     .banner-animation{
         font-family: $alternative-font-family;
@@ -14,7 +17,7 @@
         border-top-right-radius: $border-radius;
         box-shadow: 0px 1px 20px 0px rgba($black02, 0.5);
         padding: 20px 5px 20px;
-        height: calc(100vh + rem(57px));
+        height: var(--height-body);
         position: absolute;
         top: -100%;
         left: 0;

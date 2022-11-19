@@ -10,20 +10,15 @@
     
     font-family: $base-font-family;
     font-size: $base-font-size;
-    // Adaptative height of main content
-    height: 100%;
   }
    
   html {
-    font-size: $base-font-size;
-  }
-   
-   
-  // Adaptative height of main content
-  body {
-    height: 100%;
     display: flex;
     flex-direction: column;
+  }
+   
+  body {
+    flex-grow: 1;
   }
    
   main {

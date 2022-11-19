@@ -30,7 +30,7 @@ module.exports = {
                 loader: "html-loader",
             },
             {
-                test: [/\.component.scss$/, /\home.scss$/],
+                test: [/\.component.scss$/, /\home.scss$/, /\about.scss$/],
                 exclude: /node_modules/,
                 use: [
                     "sass-to-string",
@@ -46,7 +46,7 @@ module.exports = {
             },
             {
                 test: /\.scss$/,
-                exclude: [/\.component.scss$/, /\home.scss$/ ,/node_modules/],
+                exclude: [/\.component.scss$/, /\home.scss$/, /\about.scss$/ ,/node_modules/],
                 use: [
                     MiniCssExtractPlugin.loader,
                     'css-loader',

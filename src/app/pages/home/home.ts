@@ -19,10 +19,10 @@ export class HomePage extends HTMLElement {
     levelUpEmmited: number;
     valuesForm: { inputValue: string; selectValue: string; };
     timeToTrainlevelUpList = {
-        levelRecluit: 2,
-        levelSoldier: 5,
-        levelCaptain: 7,
-        levelBoss: 10
+        levelRecluit: 1,
+        levelSoldier: 2,
+        levelCaptain: 3,
+        levelBoss: 4
     };
     propertiesObject: { enumerable: boolean; writable: boolean; configurable: boolean; } = {
         enumerable: false,

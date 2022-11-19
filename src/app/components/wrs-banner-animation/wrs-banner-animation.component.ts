@@ -42,6 +42,7 @@ export class WrsBannerAnimation extends HTMLElement {
             ${this.templateCss()}
             ${this.template()}
         `;
+        this._updateHeightFromBody();
     }
 
     template(): string {
@@ -63,6 +64,12 @@ export class WrsBannerAnimation extends HTMLElement {
             this.render();
             this.createEventButton();
         }
+    }
+
+    private _updateHeightFromBody(){
+        const bodyHeight = document.body.clientHeight;
+        var bannerAnimationStyles = this.style;
+        bannerAnimationStyles.setProperty('--height-body', `${bodyHeight}px`);
     }
 
     private _checkAttributeChangedAfterLoadComponent(oldValue, newValue) {
