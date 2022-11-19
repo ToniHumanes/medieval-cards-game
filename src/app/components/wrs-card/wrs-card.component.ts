@@ -9,22 +9,23 @@ export class WrsCard extends HTMLElement {
     shadowDOM: ShadowRoot;
     baseComponentBuilder: BaseComponent;
     propertiesComponent: any;
-    button: HTMLButtonElement;
+    button: HTMLElement;
+    buttonSecondary: HTMLElement;
 
     constructor() {
         super();
         this.shadowDOM = this.attachShadow({ mode: "open" });
-        this.baseComponentBuilder = new BaseComponent({attributes: this.attributes});
+        this.baseComponentBuilder = new BaseComponent({ attributes: this.attributes });
     }
 
     connectedCallback() {
         this._buildProperties();
         this.render();
-        this.createEvent();
+        this.createEvents();
     }
 
     disconnectedCallback() {
-        this.removeEvent();
+        this.removeEvents();
         this.remove();
     }
 
@@ -33,6 +34,7 @@ export class WrsCard extends HTMLElement {
             ${this.templateCss()}
             ${this.template()}
         `;
+        this.setSecondButton();
     }
 
     template(): string {
@@ -52,7 +54,8 @@ export class WrsCard extends HTMLElement {
             <wrs-list contentList='${this.propertiesComponent.attackList.value}'></wrs-list>
         </section>
         <secton class="medieval-card__footer">
-            <wrs-button color="yellow" text="Entrenar"></wrs-button>
+            <wrs-button class="js-first-button" color="${this.propertiesComponent.colorButton.value}" text="${this.propertiesComponent.textButton.value}"></wrs-button>
+            ${this.setSecondButton()}
         </secton>
     </article>`;
     }
@@ -61,36 +64,75 @@ export class WrsCard extends HTMLElement {
         return `<style>${styles}</style>`;
     }
 
-    private _buildProperties(){
+    private _buildProperties() {
         this.propertiesComponent = this.baseComponentBuilder.mapComponentAttributes([
             'name',
             'types',
             'level',
             '_image',
-            'attackList'
+            'attackList',
+            "textButton",
+            "colorButton",
+            "textSecondButton",
+            "colorSecondButton"
         ]);
         this.propertiesComponent.attackList.value = ParseStringObject.parse(this.propertiesComponent.attackList.value);
     }
 
+    private setSecondButton() {
+        if (!!this.propertiesComponent.textSecondButton.value && !!this.propertiesComponent.colorSecondButton.value) {
+            return `<wrs-button class="js-second-button" color="${this.propertiesComponent.colorSecondButton.value}" text="${this.propertiesComponent.textSecondButton.value}"></wrs-button>`
+        }
+
+        return "";
+    }
+
     handleEvent(event) {
         if (event.type === "click") {
-          const LevelUpEvent = new CustomEvent("level-up-event", {
-            bubbles: true,
-            composed: true
-          });
-          this.dispatchEvent(LevelUpEvent);
+            const eventName = this.shadowRoot.activeElement.classList[0];
+            const eventCreated = new CustomEvent(eventName, {
+                bubbles: true,
+                composed: true
+            });
+            this.dispatchEvent(eventCreated);
         }
-      }
-    
-      createEvent(){
-        this.button = this.shadowRoot.querySelector('wrs-button').shadowRoot.querySelector('button');
-        this.button.addEventListener("click", this);
-      }
+    }
 
-      removeEvent(){
-        this.button.removeEventListener("click", this);
-      }
+    createEvents() {
+        this.eventBuilder({
+            elementId: 'js-first-button',
+            element: this.button
+        });
+        this.eventBuilder({
+            elementId: 'js-second-button',
+            element: this.buttonSecondary
+        });
+    }
 
+    removeEvents() {
+        this.eventDraft({
+            element: this.button
+        });
+        this.eventDraft({
+            element: this.buttonSecondary
+        });
+    }
+
+
+    eventBuilder(eventInfo) {
+        const buttonComponent = this.shadowRoot.querySelector(`.${eventInfo.elementId}`)
+        eventInfo.element = !!buttonComponent ? buttonComponent.shadowRoot.querySelector('button') : null;
+        if (!!eventInfo.element) {
+            eventInfo.element.classList.add(`${eventInfo.elementId}-element`);
+            eventInfo.element.addEventListener("click", this);
+        }
+    }
+
+    eventDraft(eventInfo) {
+        if (eventInfo.element) {
+            eventInfo.element.removeEventListener("click", this);
+        }
+    }
 }
 
 window.customElements.define('wrs-card', WrsCard);

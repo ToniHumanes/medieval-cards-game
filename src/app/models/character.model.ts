@@ -56,7 +56,7 @@ export class Character {
        return this.mapAttacks(attackLibrary[this.type].default); 
     }
 
-   private mapAttacks(attacks) {
+    mapAttacks(attacks) {
         const attacksList = [];
         attacks.map( attack => {
             const attackItem = new Attack(attack);
