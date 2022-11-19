@@ -5,8 +5,8 @@
         "points": "300"
     },
     {
-        "name": "Conjuro del infierno",
-        "types": ["magic", "fire"],
+        "name": "Conjuro purgatorio angelical",
+        "types": ["magic", "purity", "fire"],
         "points": "380"
     },
     {

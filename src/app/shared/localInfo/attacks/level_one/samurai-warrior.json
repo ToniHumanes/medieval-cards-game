@@ -1,0 +1,12 @@
+[
+    {
+        "name": "Corte de daga",
+        "types": ["mele"],
+        "points": "90"
+    },
+    {
+        "name": "Ataque desde las sombras",
+        "types": ["mele", "terror"],
+        "points": "130"
+    }
+]

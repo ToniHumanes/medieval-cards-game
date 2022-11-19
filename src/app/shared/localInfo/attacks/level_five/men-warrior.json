@@ -1,6 +1,6 @@
 [
     {
-        "name": "Ataque segador de almas",
+        "name": "Ataque segador de vidas",
         "types": ["magic", "fire", "rock", "water", "twister"],
         "points": "900"
     },

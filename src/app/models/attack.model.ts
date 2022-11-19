@@ -21,17 +21,20 @@ export class Attack {
             mele: "🗡",
             fire: "🔥",
             twister: "🌪",
-            magic: "🔮",
+            magic: "✨",
             ice: "❄️",
             water: "💧",
             ray: "⚡️",
-            poison: "🤢",
-            distance: "🏹",
+            poison: "🐍",
+            distance: "🎯",
             terror: "😱",
             rock: "⛰",
             shield: "🛡",
             mindControl: "🧠",
-            sun: "☀"
+            sun: "☀",
+            dark: "👹",
+            volcano: "🌋",
+            purity: "👼"
 
         }
         for (const type of typesList) {

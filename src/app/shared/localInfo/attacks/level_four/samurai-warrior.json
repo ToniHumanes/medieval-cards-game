@@ -1,0 +1,12 @@
+[
+    {
+        "name": "Golpe critico",
+        "types": ["mele", "terror"],
+        "points": "450"
+    },
+    {
+        "name": "Lanzamiento de Shuriken",
+        "types": ["distance", "mele", "poison"],
+        "points": "350"
+    }
+]

@@ -1,7 +1,7 @@
 [
     {
-        "name": "Ataque posesión mental",
-        "types": ["mindControl", "magic"],
+        "name": "Pureza del alma",
+        "types": ["purity", "magic", "shield"],
         "points": "800"
     },
     {

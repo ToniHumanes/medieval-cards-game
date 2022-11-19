@@ -5,13 +5,13 @@
         "points": "400"
     },
     {
-        "name": "Infierno desatado",
-        "types": ["magic", "fire", "twister"],
+        "name": "Infierno de escarcha",
+        "types": ["magic", "ice", "twister"],
         "points": "550"
     },
     {
         "name": "Explosión del aura",
-        "types": ["magic", "sun", "fire", "ray"],
+        "types": ["magic", "fire", "ray"],
         "points": "900"
     }
 

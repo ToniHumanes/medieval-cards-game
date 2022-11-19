@@ -2,6 +2,7 @@
 import { Boss } from '../../models/boss.model';
 import { Captain } from '../../models/captain.model';
 import { Character } from '../../models/character.model';
+import { EvilWarrior } from '../../models/evil-warrior.model';
 import { Recruit } from '../../models/recruit.model';
 import { Soldier } from '../../models/soldier.model';
 import home from './home.html'
@@ -22,6 +23,11 @@ export class HomePage extends HTMLElement {
         levelSoldier: 5,
         levelCaptain: 7,
         levelBoss: 10
+    };
+    propertiesObject: { enumerable: boolean; writable: boolean; configurable: boolean; } = {
+        enumerable: false,
+        writable: false,
+        configurable: false
     };
 
     constructor() {
@@ -70,8 +76,12 @@ export class HomePage extends HTMLElement {
             this.sendForm();
         }
 
-        if (event.type === "level-up-event") {
+        if (event.type === "js-first-button") {
             this.levelUpCharacterController();
+        }
+
+        if (event.type === "js-second-button") {
+            this.levelUpDemonicCharacter();
         }
 
         if(event.type === "end-game-event"){
@@ -86,6 +96,7 @@ export class HomePage extends HTMLElement {
     createEvents() {
         this.createEventsEndGame();
         this.createEventLevelUp();
+        this.createEventLevelUpDemonic();
         this.createEventRedirect();
     }
 
@@ -94,7 +105,11 @@ export class HomePage extends HTMLElement {
     }
 
     createEventLevelUp() {
-        document.addEventListener("level-up-event", this);
+        document.addEventListener("js-first-button", this);
+    }
+
+    createEventLevelUpDemonic(){
+        document.addEventListener("js-second-button", this);
     }
 
     createEventRedirect(){
@@ -103,7 +118,8 @@ export class HomePage extends HTMLElement {
 
     removeEvents(){
         this.button.removeEventListener('click', this);
-        document.removeEventListener("level-up-event", this);
+        document.removeEventListener("js-first-button", this);
+        document.removeEventListener("js-second-button", this);
         document.removeEventListener("end-game-event", this);
         document.removeEventListener("button-banner", this);
     }
@@ -204,6 +220,10 @@ export class HomePage extends HTMLElement {
     }
 
     setTemplateCharacter(character: Character){
+        const sectionWarrior = this.shadowRoot.querySelector('#warriorSection');
+        if(sectionWarrior){
+            sectionWarrior.remove();
+        };
         const elementSection = document.createElement('section');
         elementSection.classList.add('col-12');
         elementSection.id = 'warriorSection'
@@ -213,6 +233,9 @@ export class HomePage extends HTMLElement {
             type="${character.type}"
             level="${character.level}"
             _image="${character.image}"
+            textButton="Entrenar"
+            colorButton="yellow"
+            ${this.setAttrSecondaryButton(character.level)}
             attackList='${JSON.stringify(character.attackList)}'>
         </wrs-card>`
         this.shadowRoot.append(elementSection);
@@ -220,20 +243,16 @@ export class HomePage extends HTMLElement {
 
     levelUpCharacterController(){
         this.levelUpEmmited = !!this.levelUpEmmited ? this.levelUpEmmited + 1 : 1;
-        const propertiesObject = {
-            enumerable: false,
-            writable: false,
-            configurable: false
-        };
         const valuesCharacter = Object.create(null, {
-            name: { value: this.valuesForm.inputValue, ...propertiesObject },
-            type: { value: this.valuesForm.selectValue, ...propertiesObject }
+            name: { value: this.valuesForm.inputValue, ...this.propertiesObject },
+            type: { value: this.valuesForm.selectValue, ...this.propertiesObject }
         });
         const levelControllerMethods = [
             { methodClass: Recruit, eventEmitNumber: this.timeToTrainlevelUpList.levelRecluit },
             { methodClass: Soldier, eventEmitNumber: this.timeToTrainlevelUpList.levelSoldier },
             { methodClass: Captain, eventEmitNumber: this.timeToTrainlevelUpList.levelCaptain },
-            { methodClass: Boss, eventEmitNumber: this.timeToTrainlevelUpList.levelBoss }
+            { methodClass: Boss, eventEmitNumber: this.timeToTrainlevelUpList.levelBoss },
+            { methodClass: EvilWarrior, eventEmitNumber: this.timeToTrainlevelUpList.levelBoss }
         ];
         const levelControllerMethodsAsArray = Object.entries(levelControllerMethods)
         const methodLevelFinded = levelControllerMethodsAsArray.find( (item: any) => {
@@ -242,7 +261,6 @@ export class HomePage extends HTMLElement {
 
         if(!!methodLevelFinded){
             const characterModel = new methodLevelFinded[1].methodClass(valuesCharacter);
-            this.shadowRoot.querySelector('#warriorSection').remove();
             this.setTemplateCharacter(characterModel);
         }
 
@@ -253,6 +271,21 @@ export class HomePage extends HTMLElement {
               });
               this.dispatchEvent(endGameEvent);
         }
+    }
+
+    setAttrSecondaryButton(level: number){
+        if(level === 3){
+            return `textSecondButton="Convertirse" colorSecondButton="red"`;
+        }
+    }
+
+    levelUpDemonicCharacter(){
+        const valuesCharacter = Object.create(null, {
+            name: { value: this.valuesForm.inputValue, ...this.propertiesObject }
+        });
+        const characterModel = new EvilWarrior(valuesCharacter);
+        this.setTemplateCharacter(characterModel);
+        this.levelUpEmmited = this.timeToTrainlevelUpList.levelBoss;
     }
 
 }
