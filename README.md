@@ -1,4 +1,4 @@
-# Juego de Cartas Medievales y de Fantasia.
+# Juego de Cartas Medievales y de Fantasía.
 
 * El proyecto se ha realizado con las siguientes tecnologías:
 
