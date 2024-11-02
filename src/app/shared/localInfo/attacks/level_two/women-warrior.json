@@ -2,11 +2,11 @@
     {
         "name": "Estocada perforadora",
         "types": ["mele"],
-        "points": "150"
+        "points": 150
     },
     {
         "name": "Chubasco de dagas",
         "types": ["mele", "twister"],
-        "points": "200"
+        "points": 200
     }
 ]

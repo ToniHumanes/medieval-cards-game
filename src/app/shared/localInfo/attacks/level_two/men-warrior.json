@@ -2,11 +2,11 @@
     {
         "name": "Corte de la espada de fuego",
         "types": ["mele", "fire"],
-        "points": "150"
+        "points": 150
     },
     {
         "name": "Corte de la espada de hielo",
         "types": ["mele", "ice"],
-        "points": "200"
+        "points": 200
     }
 ]

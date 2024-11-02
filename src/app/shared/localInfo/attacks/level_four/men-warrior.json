@@ -2,16 +2,16 @@
     {
         "name": "Espadón del hielo y del trueno",
         "types": ["mele", "ice", "ray"],
-        "points": "300"
+        "points": 300
     },
     {
         "name": "Mil cortes con la espada envenenada sagrada",
         "types": ["mele", "twister", "poison"],
-        "points": "500"
+        "points": 500
     },
     {
         "name": "Surgimiento empalador de la montaña",
         "types": ["rock", "magic"],
-        "points": "400"
+        "points": 400
     }
 ]

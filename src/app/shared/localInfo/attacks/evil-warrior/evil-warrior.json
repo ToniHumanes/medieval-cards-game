@@ -2,16 +2,16 @@
     {
         "name": "Agonía de Escarcha",
         "types": ["magic", "ice", "water"],
-        "points": "950"
+        "points": 950
     },
     {
         "name": "Incinerar",
         "types": ["magic", "fire", "volcano", "dark"],
-        "points": "630"
+        "points": 630
     },
     {
         "name": "Sombra de muerte toxica",
         "types": ["shield", "magic", "terror", "poison"],
-        "points": "480"
+        "points": 480
     }
 ]

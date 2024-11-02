@@ -2,11 +2,11 @@
     {
         "name": "Golpe llamarada aterradora",
         "types": ["fire", "twister", "terror"],
-        "points": "250"
+        "points": 250
     },
     {
         "name": "Hachazo del trueno y del hielo",
         "types": ["mele", "ray", "ice"],
-        "points": "250"
+        "points": 250
     }
 ]

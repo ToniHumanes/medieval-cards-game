@@ -1,79 +1,79 @@
+import imageWarrior from "/assets/images/characters/men_warriors/level_one.png";
+import imageWarriorFemale from "/assets/images/characters/women_warriors/level_one.png";
+import imageWizard from "/assets/images/characters/wizard_warriors/level_one.png";
+import imageSamurai from "/assets/images/characters/samurai_warriors/level_one.png";
+import { Attack } from "../../app/models/attack.model";
+import * as menWarriorsJson from "../shared/localInfo/attacks/level_one/men-warrior.json";
+import * as womenWarriorsJson from "../shared/localInfo/attacks/level_one/women-warrior.json";
+import * as wizardWarriorsJson from "../shared/localInfo/attacks/level_one/wizard-warrior.json";
+import * as samuraiWarriorsJson from "../shared/localInfo/attacks/level_one/samurai-warrior.json";
+import { IBasicCharacter, ICharacter } from "../interfaces/character.interface";
+import { IAttack } from "../interfaces/attack.interface";
+import { IAvatarImage } from "../interfaces/avatarImage.interface";
+import { WarriorTypes } from "../enums/warriorTypes";
 
-import imageWarrior from '/assets/images/characters/men_warriors/level_one.png';
-import imageWarriorFemale from '/assets/images/characters/women_warriors/level_one.png';
-import imageWizard from '/assets/images/characters/wizard_warriors/level_one.png';
-import imageSamurai from '/assets/images/characters/samurai_warriors/level_one.png';
+export class Character implements ICharacter {
+  name: string;
+  type: string;
+  level: number;
+  image: string;
+  attacks: IAttack[];
 
-import { Attack } from '../../app/models/attack.model';
+  constructor({ name, type }: IBasicCharacter) {
+    this.name = name;
+    this.type = type;
+    this.level = 1;
+    this.attacks = this.getAttacks(
+      menWarriorsJson,
+      womenWarriorsJson,
+      wizardWarriorsJson,
+      samuraiWarriorsJson
+    );
+    this.image = this.getImage(this.type, {
+      imageWarrior,
+      imageWarriorFemale,
+      imageWizard,
+      imageSamurai,
+    });
+    this.transformLiteralsTypes();
+  }
 
-import * as menWarriorsJson from '../shared/localInfo/attacks/level_one/men-warrior.json';
-import * as womenWarriorsJson from '../shared/localInfo/attacks/level_one/women-warrior.json';
-import * as wizardWarriorsJson from '../shared/localInfo/attacks/level_one/wizard-warrior.json';
-import * as samuraiWarriorsJson from '../shared/localInfo/attacks/level_one/samurai-warrior.json';
+  getImage(type: string, images: IAvatarImage) {
+    const typeWarrior = {
+      1: images.imageWarrior,
+      2: images.imageWarriorFemale,
+      3: images.imageWizard,
+      4: images.imageSamurai,
+    };
+    return typeWarrior[type];
+  }
 
-export class Character {
-    name: string;
-    type: string;
-    level: number;
-    attackList: any;
-    image: string;
+  getAttacks(
+    menWarriorsJson: IAttack[],
+    womenWarriorsJson: IAttack[],
+    wizardWarriorsJson: IAttack[],
+    samuraiWarriorsJson: IAttack[]
+  ) {
+    const attackList = {
+      "1": menWarriorsJson,
+      "2": womenWarriorsJson,
+      "3": wizardWarriorsJson,
+      "4": samuraiWarriorsJson,
+    };
+    return this.mapAttacks(attackList[this.type].default);
+  }
 
-    constructor({
-        name,
-        type
-    }) {
-        this.name = name;
-        this.type = type;
-        this.level = 1;
-        this.attackList = this.getAttacks(menWarriorsJson, womenWarriorsJson, wizardWarriorsJson, samuraiWarriorsJson);
-        this.image = this.getImage(this.type, {
-            imageWarrior,
-            imageWarriorFemale,
-            imageWizard,
-            imageSamurai
+  mapAttacks(attacks: IAttack[]): Attack[] {
+    return attacks.map((attack) => new Attack(attack));
+  }
 
-        });
-        this.transformLiteralsTypes();
-    }
-
-    getImage(type: string, images) {
-        const typeWarrior = {
-            1: images.imageWarrior,
-            2: images.imageWarriorFemale,
-            3: images.imageWizard,
-            4: images.imageSamurai
-        }
-        return typeWarrior[type];
-    }
-
-    getAttacks(menWarriorsJson, womenWarriorsJson, wizardWarriorsJson, samuraiWarriorsJson){
-        const attackLibrary = {
-            "1": menWarriorsJson,
-            "2": womenWarriorsJson,
-            "3": wizardWarriorsJson,
-            "4": samuraiWarriorsJson
-        };
-       return this.mapAttacks(attackLibrary[this.type].default); 
-    }
-
-    mapAttacks(attacks) {
-        const attacksList = [];
-        attacks.map( attack => {
-            const attackItem = new Attack(attack);
-            attacksList.push(attackItem);
-        });
-        return attacksList;
-    }
-
-    transformLiteralsTypes(){
-        const typeWarrior = {
-            1: 'Guerrero',
-            2: 'Guerrera',
-            3: 'Mago',
-            4: 'Samurai'
-        }
-        this.type = typeWarrior[this.type];
-    }
-
-
+  transformLiteralsTypes() {
+    const warriorTypes = {
+      1: WarriorTypes.WARRIOR,
+      2: WarriorTypes.FEMALE_WARRIOR,
+      3: WarriorTypes.WIZARD,
+      4: WarriorTypes.SAMURAI,
+    };
+    this.type = warriorTypes[this.type];
+  }
 }

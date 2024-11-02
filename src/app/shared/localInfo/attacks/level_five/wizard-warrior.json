@@ -2,17 +2,17 @@
     {
         "name": "Muro mágico protector reforzado",
         "types": ["magic", "shield"],
-        "points": "400"
+        "points": 400
     },
     {
         "name": "Infierno de escarcha",
         "types": ["magic", "ice", "twister"],
-        "points": "550"
+        "points": 550
     },
     {
         "name": "Explosión del aura",
         "types": ["magic", "fire", "ray"],
-        "points": "900"
+        "points": 900
     }
 
 ]

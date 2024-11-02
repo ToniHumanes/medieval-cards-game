@@ -3,6 +3,6 @@
     {
         "name": "Flechazo perforador",
         "types": ["distance"],
-        "points": "140"
+        "points": 140
     }
 ]

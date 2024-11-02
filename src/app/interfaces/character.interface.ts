@@ -1,8 +1,12 @@
-import { AttackInterface } from "./attack.interface";
+import { IAttack } from "./attack.interface";
 
-export interface Character{
-    name: string;
-    type: string;
-    level: number;
-    attacks: Array<AttackInterface>
-} 
+export interface IBasicCharacter {
+  name: string;
+  type?: string;
+}
+
+export interface ICharacter extends IBasicCharacter {
+  level: number;
+  attacks: Array<IAttack>;
+  image: string;
+}
