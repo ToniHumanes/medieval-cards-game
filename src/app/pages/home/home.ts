@@ -1,4 +1,5 @@
 import { FormValues } from "../../interfaces/formValues.interface";
+import { LevelMapping } from "../../interfaces/levelMapping.interface";
 import { Boss } from "../../models/boss.model";
 import { Captain } from "../../models/captain.model";
 import { Character } from "../../models/character.model";
@@ -11,18 +12,17 @@ import styles from "./home.scss";
 export class HomePage extends HTMLElement {
   shadowDOM: ShadowRoot;
   button: HTMLButtonElement;
-  inputComponentSelector: HTMLInputElement;
   inputSelector: HTMLInputElement;
-  selectComponentSelector: HTMLSelectElement;
-  selectSelector: any;
-  levelUpEmmited: number;
+  selectSelector: HTMLSelectElement;
+  levelUpEmmited: number = 0;
   valuesForm: FormValues;
-  timeToTrainlevelUpList = {
-    levelRecluit: 1,
-    levelSoldier: 2,
-    levelCaptain: 3,
-    levelBoss: 4,
-  };
+  levelMappings: LevelMapping[] = [
+    { methodClass: Recruit, eventEmitNumber: 1 },
+    { methodClass: Soldier, eventEmitNumber: 2 },
+    { methodClass: Captain, eventEmitNumber: 3 },
+    { methodClass: Boss, eventEmitNumber: 4 },
+    { methodClass: EvilWarrior, eventEmitNumber: 4 },
+  ];
 
   constructor() {
     super();
@@ -31,20 +31,16 @@ export class HomePage extends HTMLElement {
 
   connectedCallback() {
     this.render();
-    this.setFormEvent();
-    this.createEvents();
+    this.attachFormEvents();
+    this.attachCustomEvents();
   }
 
   disconnectedCallback() {
-    this.removeEvents();
-    this.remove();
+    this.detachEvents();
   }
 
   render() {
-    this.shadowDOM.innerHTML = `
-            ${this.templateCss()}
-            ${this.template()}
-        `;
+    this.shadowDOM.innerHTML = `${this.templateCss()}${this.template()}`;
   }
 
   template(): string {
@@ -56,105 +52,50 @@ export class HomePage extends HTMLElement {
   }
 
   // *********************************
-  // Events
+  // Form Events
   // *********************************
 
-  setFormEvent() {
+  private attachFormEvents() {
     this.button = this.shadowRoot
       .querySelector("wrs-button")
-      .shadowRoot.querySelector("button");
-    this.button.addEventListener("click", this);
+      ?.shadowRoot.querySelector("button");
+    this.button?.addEventListener("click", this.sendForm.bind(this));
   }
 
-  handleEvent(event: Event) {
-    if (event.type === "click") {
-      this.sendForm();
-    }
+  private getFormValues(): FormValues | null {
+    const inputComponent = this.shadowRoot.querySelector("wrs-input");
+    const selectComponent = this.shadowRoot.querySelector("wrs-select");
+    this.inputSelector = inputComponent?.shadowRoot.querySelector("input");
+    this.selectSelector = selectComponent?.shadowRoot.querySelector("select");
 
-    if (event.type === "js-first-button") {
-      this.levelUpCharacterController();
-    }
-
-    if (event.type === "js-second-button") {
-      this.levelUpDemonicCharacter();
-    }
-
-    if (event.type === "end-game-event") {
-      this.shadowRoot
-        .querySelector("wrs-banner-animation")
-        .setAttribute("isactive", "true");
-    }
-
-    if (event.type === "button-banner") {
-      window["ROUTER"].load("home");
-    }
-  }
-
-  createEvents() {
-    this.createEventsEndGame();
-    this.createEventLevelUp();
-    this.createEventLevelUpDemonic();
-    this.createEventRedirect();
-  }
-
-  createEventsEndGame() {
-    document.addEventListener("end-game-event", this);
-  }
-
-  createEventLevelUp() {
-    document.addEventListener("js-first-button", this);
-  }
-
-  createEventLevelUpDemonic() {
-    document.addEventListener("js-second-button", this);
-  }
-
-  createEventRedirect() {
-    document.addEventListener("button-banner", this);
-  }
-
-  removeEvents() {
-    this.button.removeEventListener("click", this);
-    document.removeEventListener("js-first-button", this);
-    document.removeEventListener("js-second-button", this);
-    document.removeEventListener("end-game-event", this);
-    document.removeEventListener("button-banner", this);
-  }
-
-  // *********************************
-  // Form
-  // *********************************
-
-  private getFormValues() {
-    this.inputComponentSelector = this.shadowRoot.querySelector("wrs-input");
-    this.inputSelector =
-      this.inputComponentSelector.shadowRoot.querySelector("input");
-    this.selectComponentSelector = this.shadowRoot.querySelector("wrs-select");
-    this.selectSelector =
-      this.selectComponentSelector.shadowRoot.querySelector("select");
-
-    const isValidForm = this.checkIsValidForm({
-      input: {
-        inputComponentSelector: this.inputComponentSelector,
-        inputSelector: this.inputSelector,
-      },
-      select: {
-        selectComponentSelector: this.selectComponentSelector,
-        selectSelector: this.selectSelector,
-      },
-    });
-
-    if (isValidForm) {
+    if (this.inputSelector?.value && this.selectSelector?.value) {
       return {
         inputValue: this.inputSelector.value,
         selectValue: this.selectSelector.value,
       };
     }
+    this.displayFormErrors(inputComponent, selectComponent);
+    return null;
+  }
+
+  private displayFormErrors(inputComponent: Element, selectComponent: Element) {
+    this.showError(inputComponent, !this.inputSelector?.value);
+    this.showError(selectComponent, !Number(this.selectSelector?.value));
+  }
+
+  private showError(element: Element, condition: boolean) {
+    if (condition) {
+      const spanError = document.createElement("p");
+      spanError.className = "js-span-error text--error";
+      spanError.innerText = "Campo requerido.";
+      element.shadowRoot.append(spanError);
+    }
   }
 
   private sendForm() {
-    this.valuesForm = this.getFormValues();
-    if (this.valuesForm) {
+    const formValues = this.getFormValues();
+    if (formValues) {
+      this.valuesForm = formValues;
       this.resetForm();
       this.createCharacter(this.valuesForm);
       this.closeForm();
@@ -163,70 +104,76 @@ export class HomePage extends HTMLElement {
 
   private resetForm() {
     this.inputSelector.value = "";
-    this.selectSelector.value = this.selectSelector[0];
-    this.selectSelector[0].selected = true;
+    this.selectSelector.value = this.selectSelector.options[0].value;
   }
 
   private closeForm() {
-    this.shadowRoot.querySelector("form").remove();
-  }
-
-  private checkIsValidForm(formFields) {
-    this.removeErrorElementForm(formFields.input.inputComponentSelector);
-    this.removeErrorElementForm(formFields.select.selectComponentSelector);
-
-    if (!formFields.input.inputSelector.value) {
-      this.setErrorElementForm(formFields.input.inputComponentSelector);
-      return false;
-    }
-
-    if (!Number(formFields.select.selectSelector.value)) {
-      this.setErrorElementForm(formFields.select.selectComponentSelector);
-      return false;
-    }
-
-    return true;
-  }
-
-  private setErrorElementForm(elementForm: Element) {
-    this.removeErrorElementForm(elementForm);
-    const spanError = document.createElement("p");
-    spanError.classList.add("js-span-error", "text--error");
-    spanError.innerText = "Campo requerido.";
-    elementForm.shadowRoot.appendChild(spanError);
-  }
-
-  private removeErrorElementForm(elementForm: Element) {
-    const elementsError =
-      elementForm.shadowRoot.querySelectorAll(".js-span-error");
-    if (elementsError) {
-      for (let i = 0; i < elementsError.length; i++) {
-        elementsError[i].remove();
-      }
-    }
+    this.shadowRoot.querySelector("form")?.remove();
   }
 
   // *********************************
-  // Character
+  // Custom Events
   // *********************************
 
-  private createCharacter(dataCharecter: FormValues) {
-    const character = new Character({
-      name: dataCharecter.inputValue,
-      type: dataCharecter.selectValue,
+  private attachCustomEvents() {
+    const eventConfig = [
+      { event: "js-first-button", handler: this.levelUpCharacterController },
+      { event: "js-second-button", handler: this.levelUpDemonicCharacter },
+      { event: "end-game-event", handler: this.handleEndGameEvent },
+      { event: "button-banner", handler: this.redirectHome },
+    ];
+
+    eventConfig.forEach(({ event, handler }) => {
+      document.addEventListener(event, handler.bind(this));
     });
-    this.setTemplateCharacter(character);
   }
 
-  setTemplateCharacter(character: Recruit | EvilWarrior) {
-    const sectionWarrior = this.shadowRoot.querySelector("#warriorSection");
-    if (sectionWarrior) {
-      sectionWarrior.remove();
-    }
-    const elementSection = document.createElement("section");
-    elementSection.classList.add("col-12");
-    elementSection.id = "warriorSection";
-    elementSection.innerHTML = `
+  private detachEvents() {
+    this.button.removeEventListener("click", this.sendForm.bind(this));
+    document.removeEventListener(
+      "js-first-button",
+      this.levelUpCharacterController.bind(this)
+    );
+    document.removeEventListener(
+      "js-second-button",
+      this.levelUpDemonicCharacter.bind(this)
+    );
+    document.removeEventListener(
+      "end-game-event",
+      this.handleEndGameEvent.bind(this)
+    );
+    document.removeEventListener("button-banner", this.redirectHome.bind(this));
+  }
+
+  private handleEndGameEvent() {
+    this.shadowRoot
+      .querySelector("wrs-banner-animation")
+      ?.setAttribute("isactive", "true");
+  }
+
+  private redirectHome() {
+    window["ROUTER"].load("home");
+  }
+
+  // *********************************
+  // Character Logic
+  // *********************************
+
+  private createCharacter(data: FormValues) {
+    const character = new Character({
+      name: data.inputValue,
+      type: data.selectValue,
+    });
+    this.renderCharacter(character);
+  }
+
+  private renderCharacter(character: Recruit | EvilWarrior) {
+    this.shadowDOM.querySelector("#warriorSection")?.remove();
+
+    const section = document.createElement("section");
+    section.className = "col-12";
+    section.id = "warriorSection";
+    section.innerHTML = `
         <wrs-card
             name="${character.name}"
             type="${character.type}"
@@ -234,75 +181,43 @@ export class HomePage extends HTMLElement {
             _image="${character.image}"
             textButton="Entrenar"
             colorButton="yellow"
-            ${this.setAttrSecondaryButton(character.level)}
+            ${
+              character.level === 3
+                ? 'textSecondButton="Convertirse" colorSecondButton="red"'
+                : ""
+            }
             attackList='${JSON.stringify(character.attacks)}'>
         </wrs-card>`;
-    this.shadowRoot.append(elementSection);
+
+    this.shadowDOM.append(section);
   }
 
-  levelUpCharacterController() {
-    this.levelUpEmmited = !!this.levelUpEmmited ? this.levelUpEmmited + 1 : 1;
-    const valuesCharacter = {
-      name: this.valuesForm.inputValue,
-      type: this.valuesForm.selectValue,
-    };
-    const levelControllerMethods = [
-      {
-        methodClass: Recruit,
-        eventEmitNumber: this.timeToTrainlevelUpList.levelRecluit,
-      },
-      {
-        methodClass: Soldier,
-        eventEmitNumber: this.timeToTrainlevelUpList.levelSoldier,
-      },
-      {
-        methodClass: Captain,
-        eventEmitNumber: this.timeToTrainlevelUpList.levelCaptain,
-      },
-      {
-        methodClass: Boss,
-        eventEmitNumber: this.timeToTrainlevelUpList.levelBoss,
-      },
-      {
-        methodClass: EvilWarrior,
-        eventEmitNumber: this.timeToTrainlevelUpList.levelBoss,
-      },
-    ];
-    const levelControllerMethodsAsArray = Object.entries(
-      levelControllerMethods
-    );
-    const methodLevelFinded = levelControllerMethodsAsArray.find((item) => {
-      return item[1].eventEmitNumber === this.levelUpEmmited;
-    });
+  private levelUpCharacterController() {
+    this.levelUpEmmited++;
 
-    if (!!methodLevelFinded) {
-      const characterModel = new methodLevelFinded[1].methodClass(
-        valuesCharacter
-      );
-      this.setTemplateCharacter(characterModel);
-    }
+    const characterClass = this.levelMappings.find(
+      (mapping) => mapping.eventEmitNumber === this.levelUpEmmited
+    )?.methodClass;
 
-    if (this.levelUpEmmited > this.timeToTrainlevelUpList.levelBoss) {
-      const endGameEvent = new CustomEvent("end-game-event", {
-        bubbles: true,
-        composed: true,
+    if (characterClass) {
+      const newCharacter = new characterClass({
+        name: this.valuesForm.inputValue,
+        type: this.valuesForm.selectValue,
       });
-      this.dispatchEvent(endGameEvent);
+      this.renderCharacter(newCharacter);
+    }
+
+    if (this.levelUpEmmited > 4) {
+      this.dispatchEvent(
+        new CustomEvent("end-game-event", { bubbles: true, composed: true })
+      );
     }
   }
 
-  setAttrSecondaryButton(level: number) {
-    if (level === 3) {
-      return `textSecondButton="Convertirse" colorSecondButton="red"`;
-    }
-  }
-
-  levelUpDemonicCharacter() {
-    const valuesCharacter = {
-      name: this.valuesForm.inputValue,
-    };
-    this.setTemplateCharacter(new EvilWarrior(valuesCharacter));
-    this.levelUpEmmited = this.timeToTrainlevelUpList.levelBoss;
+  private levelUpDemonicCharacter() {
+    const newCharacter = new EvilWarrior({ name: this.valuesForm.inputValue });
+    this.renderCharacter(newCharacter);
+    this.levelUpEmmited = 4;
   }
 }
 
