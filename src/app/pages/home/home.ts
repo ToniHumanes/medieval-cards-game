@@ -1,3 +1,4 @@
+import { FormValues } from "../../interfaces/formValues.interface";
 import { Boss } from "../../models/boss.model";
 import { Captain } from "../../models/captain.model";
 import { Character } from "../../models/character.model";
@@ -15,7 +16,7 @@ export class HomePage extends HTMLElement {
   selectComponentSelector: HTMLSelectElement;
   selectSelector: any;
   levelUpEmmited: number;
-  valuesForm: { inputValue: string; selectValue: string };
+  valuesForm: FormValues;
   timeToTrainlevelUpList = {
     levelRecluit: 1,
     levelSoldier: 2,
@@ -209,10 +210,7 @@ export class HomePage extends HTMLElement {
   // Character
   // *********************************
 
-  private createCharacter(dataCharecter: {
-    inputValue: string;
-    selectValue: string;
-  }) {
+  private createCharacter(dataCharecter: FormValues) {
     const character = new Character({
       name: dataCharecter.inputValue,
       type: dataCharecter.selectValue,
