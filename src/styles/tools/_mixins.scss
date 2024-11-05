@@ -62,14 +62,14 @@
         @for $column from 1 to $columns-number+1 {
             .col-#{$column} {
                 //flex-basis: percentage($column / $columns-number);
-                width: calc((100% * $column) / $columns-number);
+                width: (100% * $column) / $columns-number;
             }
         }
     }@else{
         @for $column from 1 to $columns-number+1 {
             .col-#{$breakpoint}-#{$column} {
                 //flex-basis: percentage($column / $columns-number);
-                width: calc((100% * $column) / $columns-number);
+                width: (100% * $column) / $columns-number;
             }
         }
     }
@@ -80,7 +80,7 @@
     @if $offset {
         @for $column from 1 to $columns-number+1 {
             .col-#{$breakpoint}-offset-#{$column} {
-                margin-left: calc((100% * $column) / $columns-number);
+                margin-left: ((100% * $column) / $columns-number);
             }
         }
     }

@@ -1,10 +1,11 @@
 const path = require('path');
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 
 module.exports = {
-    mode: 'development',
-    //mode: 'production',  
+    //mode: 'development',
+    mode: 'production',
     entry: {
         base: './src/app/index.ts'
     },
@@ -20,7 +21,8 @@ module.exports = {
         })
     ],
     module: {
-        rules: [{
+        rules: [
+            {
                 test: /\.tsx?$/,
                 use: 'ts-loader',
                 exclude: /node_modules/
@@ -30,7 +32,7 @@ module.exports = {
                 loader: "html-loader",
             },
             {
-                test: [/\.component.scss$/, /\home.scss$/, /\about.scss$/],
+                test: [/\.component.scss$/, /home.scss$/, /about.scss$/],
                 exclude: /node_modules/,
                 use: [
                     "sass-to-string",
@@ -46,7 +48,7 @@ module.exports = {
             },
             {
                 test: /\.scss$/,
-                exclude: [/\.component.scss$/, /\home.scss$/, /\about.scss$/ ,/node_modules/],
+                exclude: [/\.component.scss$/, /home.scss$/, /about.scss$/, /node_modules/],
                 use: [
                     MiniCssExtractPlugin.loader,
                     'css-loader',
@@ -60,6 +62,13 @@ module.exports = {
                     filename: '[path][name][ext]'
                 },
             }
+        ],
+    },
+    optimization: {
+        minimize: true,
+        minimizer: [
+            `...`,
+            new CssMinimizerPlugin(),
         ],
     },
     resolve: {

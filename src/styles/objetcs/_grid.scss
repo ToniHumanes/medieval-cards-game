@@ -32,7 +32,7 @@
 }
 
 [class*=col] {
-    padding: calc($gutter / 2);
+    padding: ($gutter / 2);
 }
 
 .col {
