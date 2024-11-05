@@ -2,16 +2,16 @@
     {
         "name": "Espadazo letal",
         "types": ["mele", "terror"],
-        "points": "300"
+        "points": 300
     },
     {
         "name": "Conjuro purgatorio angelical",
         "types": ["magic", "purity", "fire"],
-        "points": "380"
+        "points": 380
     },
     {
         "name": "Tornado de la ventisca eterna",
         "types": ["mele", "ice", "twister", "water"],
-        "points": "480"
+        "points": 480
     }
 ]

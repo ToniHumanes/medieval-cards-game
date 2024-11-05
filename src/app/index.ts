@@ -1,11 +1,10 @@
-
-import '../styles/styles.scss';
-import { AppModule } from './app.module';
+import "../styles/styles.scss";
+import { AppModule } from "./app.module";
 
 class initApp {
-    constructor(){
-        new AppModule();
-    }
+  constructor() {
+    new AppModule();
+  }
 }
 
 new initApp();

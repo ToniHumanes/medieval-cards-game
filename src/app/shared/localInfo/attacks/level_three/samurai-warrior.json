@@ -2,11 +2,11 @@
     {
         "name": "Contraataque total",
         "types": ["mele", "magic", "shield"],
-        "points": "300"
+        "points": 300
     },
     {
         "name": "Prominencia Oscura",
         "types": ["mele", "dark", "terror"],
-        "points": "350"
+        "points": 350
     }
 ]

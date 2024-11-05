@@ -2,11 +2,11 @@
     {
         "name": "Pureza del alma",
         "types": ["purity", "magic", "shield"],
-        "points": "800"
+        "points": 800
     },
     {
         "name": "Ataque de los elementos",
         "types": ["water", "rock", "twister", "ice", "magic"],
-        "points": "880"
+        "points": 880
     }
 ]

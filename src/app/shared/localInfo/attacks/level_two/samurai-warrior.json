@@ -2,11 +2,11 @@
     {
         "name": "Protección de la oscuridad",
         "types": ["mele", "shield", "terror"],
-        "points": "150"
+        "points": 150
     },
     {
         "name": "Dominar batalla",
         "types": ["mele", "mindControl"],
-        "points": "180"
+        "points": 180
     }
 ]

@@ -3,6 +3,6 @@
     {
         "name": "bola de fuego",
         "types": ["fire", "magic", "distance"],
-        "points": "110"
+        "points": 110
     }
 ]
