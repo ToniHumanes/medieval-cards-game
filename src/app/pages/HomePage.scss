@@ -1,0 +1,35 @@
+@import "../styles/shared";
+
+.form {
+  &__content {
+    display: grid;
+    width: 100%;
+    grid-template-columns: 1fr;
+    row-gap: rem(16px);
+
+    @media (min-width: $screen-md) {
+      grid-template-columns: 1fr 1fr;
+      grid-template-areas: "input select" "button button";
+      align-items: baseline;
+      column-gap: rem(16px);
+    }
+  }
+
+  .input {
+    @media (min-width: $screen-md) {
+      grid-area: input;
+    }
+  }
+
+  .select {
+    @media (min-width: $screen-md) {
+      grid-area: select;
+    }
+  }
+
+  &__actions {
+    @media (min-width: $screen-md) {
+      grid-area: button;
+    }
+  }
+}

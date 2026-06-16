@@ -5,7 +5,7 @@ export class Attack implements IAttack {
   points: number;
   types: string[];
 
-  constructor({ name, points, types }) {
+  constructor({ name, points, types }: IAttack) {
     this.name = name;
     this.points = points;
     this.types = this._getTypes(types);

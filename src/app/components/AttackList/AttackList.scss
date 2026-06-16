@@ -1,0 +1,34 @@
+@import "../../styles/shared";
+
+.wrs-list {
+  padding: 0;
+}
+
+.wrs-list-item {
+  font-family: $alternative-font-family;
+  font-size: $size--xxs;
+  padding: 20px 0;
+  margin-left: 1.2rem;
+  border-bottom: 2px solid $brown02;
+  grid-template-columns: auto 1fr;
+  display: grid;
+
+  &:first-of-type {
+    padding-top: 0;
+  }
+
+  > p {
+    &:first-child {
+      grid-column: 2 span;
+      margin-bottom: 1rem;
+    }
+
+    &:last-child {
+      text-align: end;
+    }
+  }
+
+  &__type {
+    font-family: $emoji-font-family;
+  }
+}

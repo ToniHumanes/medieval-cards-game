@@ -1,0 +1,12 @@
+@import "../styles/shared";
+
+.about-page {
+  p {
+    color: $black00;
+  }
+
+  a {
+    color: $blue00;
+    text-decoration: none;
+  }
+}

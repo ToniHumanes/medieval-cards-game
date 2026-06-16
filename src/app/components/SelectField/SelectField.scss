@@ -1,0 +1,45 @@
+@import "../../styles/shared";
+
+.select {
+  display: grid;
+  font-family: $alternative-font-family;
+  font-size: rem(18px);
+
+  &__label {
+    margin-bottom: rem(10px);
+  }
+
+  &__field {
+    width: 100%;
+    background-color: $brown01;
+    border: 1px solid $brown02;
+    padding: 16px 12px;
+    border-radius: $border-radius;
+    appearance: none;
+    text-indent: 1px;
+    grid-area: select;
+
+    &:focus,
+    &:focus-visible,
+    &:focus-within {
+      outline-color: $yellow00;
+    }
+  }
+
+  &__contain {
+    display: grid;
+    grid-template-areas: "select";
+
+    &:after {
+      content: ">";
+      color: $black00;
+      font-size: rem(24px);
+      transform: rotate(90deg);
+      pointer-events: none;
+      grid-area: select;
+      align-self: center;
+      justify-self: end;
+      margin-right: 1rem;
+    }
+  }
+}

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Web Components React Prep"
+  short_description: "Prepare Web Components migration to React"
+  default_prompt: "Use $web-components-react-migration-prep to audit this Web Components app before migrating it to React."
