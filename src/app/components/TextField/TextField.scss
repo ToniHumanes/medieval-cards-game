@@ -1,0 +1,33 @@
+@import "../../styles/shared";
+
+.input {
+  display: grid;
+  font-family: $alternative-font-family;
+  font-size: rem(18px);
+
+  &__label {
+    margin-bottom: rem(10px);
+  }
+
+  &__field {
+    background-color: $brown01;
+    border: 1px solid $brown02;
+    padding: 16px 12px;
+    border-radius: $border-radius;
+
+    &:focus,
+    &:focus-visible,
+    &:focus-within {
+      outline-color: $yellow00;
+    }
+
+    &::placeholder {
+      color: $black00;
+    }
+  }
+}
+
+.text--error {
+  margin-top: 5px;
+  color: $red00;
+}

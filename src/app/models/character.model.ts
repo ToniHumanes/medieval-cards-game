@@ -1,12 +1,12 @@
-import imageWarrior from "/assets/images/characters/men_warriors/level_one.png";
-import imageWarriorFemale from "/assets/images/characters/women_warriors/level_one.png";
-import imageWizard from "/assets/images/characters/wizard_warriors/level_one.png";
-import imageSamurai from "/assets/images/characters/samurai_warriors/level_one.png";
-import { Attack } from "../../app/models/attack.model";
-import * as menWarriorsJson from "../shared/localInfo/attacks/level_one/men-warrior.json";
-import * as womenWarriorsJson from "../shared/localInfo/attacks/level_one/women-warrior.json";
-import * as wizardWarriorsJson from "../shared/localInfo/attacks/level_one/wizard-warrior.json";
-import * as samuraiWarriorsJson from "../shared/localInfo/attacks/level_one/samurai-warrior.json";
+import imageWarrior from "../../../assets/images/characters/men_warriors/level_one.png";
+import imageWarriorFemale from "../../../assets/images/characters/women_warriors/level_one.png";
+import imageWizard from "../../../assets/images/characters/wizard_warriors/level_one.png";
+import imageSamurai from "../../../assets/images/characters/samurai_warriors/level_one.png";
+import { Attack } from "./attack.model";
+import menWarriorsJson from "../shared/localInfo/attacks/level_one/men-warrior.json";
+import womenWarriorsJson from "../shared/localInfo/attacks/level_one/women-warrior.json";
+import wizardWarriorsJson from "../shared/localInfo/attacks/level_one/wizard-warrior.json";
+import samuraiWarriorsJson from "../shared/localInfo/attacks/level_one/samurai-warrior.json";
 import { IBasicCharacter, ICharacter } from "../interfaces/character.interface";
 import { IAttack } from "../interfaces/attack.interface";
 import { IAvatarImage } from "../interfaces/avatarImage.interface";
@@ -60,7 +60,7 @@ export class Character implements ICharacter {
       "3": wizardWarriorsJson,
       "4": samuraiWarriorsJson,
     };
-    return this.mapAttacks(attackList[this.type].default);
+    return this.mapAttacks(attackList[this.type]);
   }
 
   mapAttacks(attacks: IAttack[]): Attack[] {

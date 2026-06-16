@@ -1,0 +1,103 @@
+@import "../../styles/shared";
+
+.medieval-card {
+  position: relative;
+  margin: 0 auto;
+  background-size: contain;
+  background-repeat: repeat;
+  padding: 20px 30px;
+  width: 100%;
+  max-width: rem(500px);
+  border-radius: $border-radius;
+  box-shadow: 2px 2px 9px 0 rgba($black02, 0.5);
+
+  > * {
+    position: relative;
+    z-index: 20;
+  }
+
+  &:before {
+    content: "";
+    background-color: rgba($brown00, 0.55);
+    border-radius: $border-radius;
+    z-index: 10;
+    position: absolute;
+    inset: 0;
+  }
+
+  &__title {
+    font-size: rem(23px);
+    margin-bottom: rem(10px);
+    grid-column: span 2;
+
+    @media (min-width: $screen-md) {
+      font-size: rem(26px);
+    }
+  }
+
+  &__paragraph {
+    font-family: $alternative-font-family;
+    line-height: 2.2rem;
+    font-size: rem(20px);
+    margin-bottom: rem(10px);
+
+    @media (min-width: $screen-md) {
+      font-size: rem(24px);
+    }
+
+    &--small {
+      font-size: rem(18px);
+
+      @media (min-width: $screen-md) {
+        font-size: rem(20px);
+      }
+    }
+
+    &--align-end {
+      text-align: end;
+    }
+  }
+
+  &__picture {
+    display: flex;
+    align-items: end;
+    justify-content: center;
+    background-color: rgba($brown01, 0.7);
+    border: 3px solid $brown02;
+    border-radius: $border-radius;
+    overflow: hidden;
+    margin-bottom: rem(30px);
+  }
+
+  &__image {
+    width: 256px;
+    height: 256px;
+    position: relative;
+    bottom: -13px;
+  }
+
+  &__template-content {
+    display: grid;
+    grid-template-columns: repeat(2, auto);
+    column-gap: 12px;
+    margin-bottom: rem(20px);
+  }
+
+  &__attacks {
+    margin-bottom: rem(30px);
+  }
+
+  &__footer {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    row-gap: 1rem;
+
+    @media (min-width: $screen-xxs) {
+      flex-direction: row;
+      column-gap: 2rem;
+    }
+  }
+}

@@ -1,6 +1,6 @@
 import { Character } from "./character.model";
-import imageEvilWarrior from "/assets/images/characters/evil_warriors/level_one.png";
-import * as evilWarriorsJson from "../shared/localInfo/attacks/evil-warrior/evil-warrior.json";
+import imageEvilWarrior from "../../../assets/images/characters/evil_warriors/level_one.png";
+import evilWarriorsJson from "../shared/localInfo/attacks/evil-warrior/evil-warrior.json";
 import { IBasicCharacter } from "../interfaces/character.interface";
 import { WarriorTypes } from "../enums/warriorTypes";
 
@@ -15,7 +15,7 @@ export class EvilWarrior extends Character {
   }
 
   getAttacks(evilWarriorsJson) {
-    return this.mapAttacks(evilWarriorsJson.default);
+    return this.mapAttacks(evilWarriorsJson);
   }
 
   getImage(imageEvilWarrior: string) {

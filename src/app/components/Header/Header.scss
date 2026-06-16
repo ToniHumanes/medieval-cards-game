@@ -1,0 +1,33 @@
+@import "../../styles/shared";
+
+.header {
+  padding: rem(16px);
+  background-color: $brown01;
+  display: flex;
+  column-gap: rem(10px);
+
+  a {
+    font-size: rem(16px);
+    font-family: $alternative-font-family;
+    color: $black00;
+    border: none;
+    cursor: pointer;
+    background-color: inherit;
+    display: inline-flex;
+    text-decoration: none;
+
+    &:after {
+      content: "|";
+      margin-left: 1rem;
+      margin-right: 1rem;
+    }
+
+    &:last-child::after {
+      content: none;
+    }
+
+    @media (min-width: $screen-sm) {
+      font-size: rem(20px);
+    }
+  }
+}
